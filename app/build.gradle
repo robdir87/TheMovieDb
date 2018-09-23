@@ -29,6 +29,10 @@ android {
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
+        test{
+            java.srcDirs += 'src/test/kotlin'
+            java.srcDirs += 'src/test/resources'
+        }
     }
 }
 
@@ -42,6 +46,29 @@ dependencies {
 
     implementation libraries.supportLibrary
     implementation libraries.designLibrary
+
+    // Dependency Injection
+    implementation libraries.dagger
+    implementation libraries.daggerAndroidSupport
+    kapt libraries.daggerCompiler
+    kapt libraries.daggerAndroidProcessor
+
+    // Rx
+    implementation libraries.rxJava
+    implementation libraries.rxAndroid
+
+    // Architecture Components
+    implementation libraries.lifecycle
+    kapt libraries.lifecycleCompiler
+
+    // Retrofit
+    implementation libraries.retrofit
+    implementation libraries.retrofitGsonConverter
+    implementation libraries.retrofitAdapter
+    implementation libraries.httpLoggingInterceptor
+
+    // Picasso
+    implementation libraries.picasso
 
     // Testing
     testImplementation libraries.junit

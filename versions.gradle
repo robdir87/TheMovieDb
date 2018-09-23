@@ -11,6 +11,18 @@ ext.versions = [
     // App dependencies
     supportLibraryVersion: '27.1.1',
 
+    daggerVersion: '2.17',
+
+    rxJavaVersion: '2.2.2',
+    rxAndroidVersion: '2.1.0',
+
+    lifecycleVersion: '1.1.1',
+
+    retrofitVersion: '2.4.0',
+    httpLoggingInterceptorVersion: '3.10.0',
+
+    picassoVersion: '2.71828',
+
     // Testing
     jUnitVersion: '4.12',
     mockitoVersion: '2.10.0',
@@ -24,6 +36,29 @@ ext.libraries = [
     // Support Library
     supportLibrary : "com.android.support:appcompat-v7:$versions.supportLibraryVersion",
     designLibrary : "com.android.support:design:$versions.supportLibraryVersion",
+
+    // Dependency Injection
+    dagger : "com.google.dagger:dagger:$versions.daggerVersion",
+    daggerCompiler : "com.google.dagger:dagger-compiler:$versions.daggerVersion",
+    daggerAndroidSupport : "com.google.dagger:dagger-android-support:$versions.daggerVersion",
+    daggerAndroidProcessor: "com.google.dagger:dagger-android-processor:$versions.daggerVersion",
+
+    // Rx
+    rxJava : "io.reactivex.rxjava2:rxjava:$versions.rxJavaVersion",
+    rxAndroid : "io.reactivex.rxjava2:rxandroid:$versions.rxAndroidVersion",
+
+    // Architecture Components
+    lifecycle: "android.arch.lifecycle:extensions:$versions.lifecycleVersion",
+    lifecycleCompiler: "android.arch.lifecycle:compiler:$versions.lifecycleVersion",
+
+    // retrofit
+    retrofit : "com.squareup.retrofit2:retrofit:$versions.retrofitVersion",
+    retrofitGsonConverter : "com.squareup.retrofit2:converter-gson:$versions.retrofitVersion",
+    retrofitAdapter: "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofitVersion",
+    httpLoggingInterceptor : "com.squareup.okhttp3:logging-interceptor:$versions.httpLoggingInterceptorVersion",
+
+    // Picasso
+    picasso : "com.squareup.picasso:picasso:$versions.picassoVersion",
 
     // Testing
     junit : "junit:junit:$versions.jUnitVersion",

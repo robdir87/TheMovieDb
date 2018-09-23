@@ -32,6 +32,9 @@ android {
     }
 }
 
+preBuild.dependsOn ':ktlint'
+preBuild.dependsOn ':detekt'
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 

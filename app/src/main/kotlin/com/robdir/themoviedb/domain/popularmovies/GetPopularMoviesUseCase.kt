@@ -1,7 +1,5 @@
 package com.robdir.themoviedb.domain.popularmovies
 
-import android.support.annotation.VisibleForTesting
-import com.robdir.themoviedb.data.genres.GenreEntity
 import com.robdir.themoviedb.data.genres.GenresRepositoryContract
 import com.robdir.themoviedb.data.movies.MoviesRepositoryContract
 import com.robdir.themoviedb.domain.GenreNameMapper
@@ -21,10 +19,6 @@ class GetPopularMoviesUseCase @Inject constructor(
     override fun getPopularMovies(page: Int): Single<List<Movie>> =
         moviesRepositoryContract.getPopularMovies(page)
             .zipWith(genresRepositoryContract.getGenres(), BiFunction { popularMovies, genres ->
-                movieMapper.toDomainModel(popularMovies, genres.toMap())
+                movieMapper.toDomainModel(popularMovies, genreNameMapper.toNameMap(genres))
             })
-
-    @VisibleForTesting
-    fun List<GenreEntity>.toMap(): Map<Int, String> = map { it.id to it.name }.toMap()
-
 }

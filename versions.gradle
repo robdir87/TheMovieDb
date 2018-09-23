@@ -1,0 +1,33 @@
+ext.versions = [
+    gradleVersion: '3.1.4',
+    kotlinVersion: '1.2.60',
+
+    // Sdk and tools
+    minSdkVersion: 15,
+    targetSdkVersion: 28,
+    compileSdkVersion: 28,
+    buildToolsVersion: '28.0.2',
+
+    // App dependencies
+    supportLibraryVersion: '27.1.1',
+
+    // Testing
+    jUnitVersion: '4.12',
+    mockitoVersion: '2.10.0',
+    testRunnerVersion: '1.0.1'
+]
+
+ext.libraries = [
+    // Kotlin
+    kotlin : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlinVersion",
+
+    // Support Library
+    supportLibrary : "com.android.support:appcompat-v7:$versions.supportLibraryVersion",
+    designLibrary : "com.android.support:design:$versions.supportLibraryVersion",
+
+    // Testing
+    junit : "junit:junit:$versions.jUnitVersion",
+    mockitoCore : "org.mockito:mockito-core:$versions.mockitoVersion",
+    testRunner : "com.android.support.test:runner:$versions.testRunnerVersion",
+    kotlinTest : "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlinVersion"
+]

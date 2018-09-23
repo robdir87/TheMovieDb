@@ -5,7 +5,7 @@ import com.robdir.themoviedb.MockDataProvider.createMockMovieEntity
 import com.robdir.themoviedb.MockDataProvider.mockMovieGenreIds
 import com.robdir.themoviedb.MockDataProvider.mockMovieGenreMap
 import com.robdir.themoviedb.MockDataProvider.mockMovieGenreNames
-import com.robdir.themoviedb.domain.GenreNameMapperTest
+import com.robdir.themoviedb.domain.GenreNameMapper
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -14,12 +14,11 @@ import org.mockito.Mockito.mock
 
 class MovieMapperTest {
 
-    private val mockGenreNameMapper = mock(GenreNameMapperTest::class.java)
+    private val mockGenreNameMapper = mock(GenreNameMapper::class.java)
     private val movieMapper = MovieMapper(mockGenreNameMapper)
 
     private val movieEntity = createMockMovieEntity()
     private val movie = createMockMovie()
-
 
     @Before
     fun setup() {

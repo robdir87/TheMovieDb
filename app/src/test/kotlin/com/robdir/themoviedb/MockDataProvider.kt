@@ -41,7 +41,7 @@ object MockDataProvider {
             mockMovieId, mockMovieTitle, mockMoviePopularity, mockMoviePosterPath, mockMovieReleaseDate, genreNames
         )
 
-    fun createGenreEntity(): GenreEntity = GenreEntity(mockGenreId, mockGenreName)
+    fun createMockGenreEntity(): GenreEntity = GenreEntity(mockGenreId, mockGenreName)
 
     fun createMockMovieModel(genres: String = mockGenreName): MovieModel =
         MovieModel(

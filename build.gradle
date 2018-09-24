@@ -4,7 +4,6 @@ buildscript {
     apply from: 'versions.gradle'
     apply from: 'ktlint.gradle'
     apply from: 'detekt.gradle'
-    apply from: 'secrets.gradle'
 
     repositories {
         google()

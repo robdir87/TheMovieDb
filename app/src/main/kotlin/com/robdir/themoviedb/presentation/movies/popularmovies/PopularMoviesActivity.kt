@@ -1,10 +1,10 @@
-package com.robdir.themoviedb.presentation.popularmovies
+package com.robdir.themoviedb.presentation.movies.popularmovies
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import com.robdir.themoviedb.R
+import com.robdir.themoviedb.presentation.base.BaseActivity
 
-class PopularMoviesActivity : AppCompatActivity() {
+class PopularMoviesActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

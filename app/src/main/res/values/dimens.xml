@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_regular">12dp</dimen>
+
+    <dimen name="app_bar_layout_elevation">2dp</dimen>
+</resources>

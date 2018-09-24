@@ -9,9 +9,14 @@ import android.support.v7.widget.LinearLayoutManager
 import com.robdir.themoviedb.R
 import com.robdir.themoviedb.presentation.base.BaseActivity
 import com.robdir.themoviedb.presentation.common.TheMovieDbError
+import com.robdir.themoviedb.presentation.common.gone
+import com.robdir.themoviedb.presentation.common.showConfirmCancelAlert
+import com.robdir.themoviedb.presentation.common.visible
+import com.robdir.themoviedb.presentation.common.visibleIf
 import com.robdir.themoviedb.presentation.movies.common.MovieAdapter
 import com.robdir.themoviedb.presentation.movies.common.MovieModel
 import kotlinx.android.synthetic.main.activity_popular_movies.*
+import kotlinx.android.synthetic.main.layout_no_popular_movies.*
 import javax.inject.Inject
 
 class PopularMoviesActivity :
@@ -51,11 +56,15 @@ class PopularMoviesActivity :
                     )
 
                     error.observe(this@PopularMoviesActivity,
-                        Observer<TheMovieDbError> { manageError(R.string.network_error_message) }
+                        Observer<TheMovieDbError> { manageError(R.string.generic_error) }
                     )
 
-                    // TODO: network error
+                    networkError.observe(this@PopularMoviesActivity,
+                        Observer<TheMovieDbError> { manageError(R.string.network_error_message) }
+                    )
                 }
+
+        textViewPopularMovieEmptyListAction.setOnClickListener { loadPopularMovies() }
 
         loadPopularMovies()
     }
@@ -74,6 +83,7 @@ class PopularMoviesActivity :
                 movieAdapter.clear()
                 loadPopularMovies()
             }
+            setColorSchemeResources(R.color.colorAccent)
         }
 
         recyclerViewMovies.apply {
@@ -84,26 +94,38 @@ class PopularMoviesActivity :
     }
 
     private fun displayMovies(movies: List<MovieModel>) {
+        swipeRefreshLayoutMovies.visible()
         swipeRefreshLayoutMovies.isRefreshing = false
+        recyclerViewMovies.visible()
+        layoutEmptyPopularMovieList.gone()
+
         movieAdapter.addMovies(movies)
     }
 
     private fun loadPopularMovies() {
-        // TODO: swap visibility empty list and list
         popularMoviesViewModel.getPopularMovies()
     }
 
     private fun showProgress() {
-        // TODO
+        layoutPopularMoviesProgress.visibleIf(!swipeRefreshLayoutMovies.isRefreshing)
     }
 
     private fun hideProgress() {
-        // TODO
+        layoutPopularMoviesProgress.gone()
     }
 
     private fun manageError(@StringRes stringResId: Int) {
-        // TODO: swap visibility empty list and list
-        // TODO: show error
+        swipeRefreshLayoutMovies.gone()
+        swipeRefreshLayoutMovies.isRefreshing = false
+
+        layoutEmptyPopularMovieList.visible()
+
+        showConfirmCancelAlert(
+            message = getString(stringResId),
+            confirmButtonLabel = getString(R.string.alert_action_try_again),
+            onConfirmButtonClicked = { _, _ -> loadPopularMovies() },
+            cancelButtonLabel = getString(R.string.alert_action_ok)
+        )
     }
     // endregion
 }

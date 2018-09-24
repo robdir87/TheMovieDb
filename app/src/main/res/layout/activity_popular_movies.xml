@@ -19,7 +19,9 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="@string/popular_movies_toolbar_title"
+            app:titleTextColor="@color/colorWhiteOpaque" />
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout
@@ -27,15 +29,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/margin_regular"
-        android:layout_marginRight="@dimen/margin_regular"
-        android:visibility="gone">
+        android:layout_marginRight="@dimen/margin_regular">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerViewMovies"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/margin_regular"
-            android:layout_marginRight="@dimen/margin_regular" />
+            android:layout_height="match_parent" />
     </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

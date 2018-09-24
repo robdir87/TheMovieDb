@@ -40,6 +40,17 @@ android {
             java.srcDirs += 'src/test/resources'
         }
     }
+
+    testOptions {
+        unitTests {
+            returnDefaultValues = true
+            includeAndroidResources = true
+
+            all {
+                jvmArgs '-noverify'
+            }
+        }
+    }
 }
 
 preBuild.dependsOn ':ktlint'

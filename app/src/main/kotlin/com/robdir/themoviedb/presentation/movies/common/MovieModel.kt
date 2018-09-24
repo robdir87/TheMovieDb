@@ -7,6 +7,7 @@ data class MovieModel(
     val id: Int,
     val title: String,
     val popularity: Int,
+    val thumbnailUrl: String,
     val posterUrl: String,
     val releaseYear: String,
     val genres: String
@@ -20,6 +21,7 @@ data class MovieModel(
                     id = source.readInt(),
                     title = source.readString().orEmpty(),
                     popularity = source.readInt(),
+                    thumbnailUrl = source.readString().orEmpty(),
                     posterUrl = source.readString().orEmpty(),
                     releaseYear = source.readString().orEmpty(),
                     genres = source.readString().orEmpty()
@@ -35,6 +37,7 @@ data class MovieModel(
         writeInt(id)
         writeString(title)
         writeInt(popularity)
+        writeString(thumbnailUrl)
         writeString(posterUrl)
         writeString(releaseYear)
         writeString(genres)

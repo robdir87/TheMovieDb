@@ -21,7 +21,7 @@ android {
 
         buildConfigField "String", "THE_MOVIE_DB_API_KEY", THE_MOVIE_DB_API_KEY
         buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/3/\""
-        buildConfigField "String", "POSTER_URL", "\"http://image.tmdb.org/t/p/w%s\""
+        buildConfigField "String", "POSTER_URL", "\"http://image.tmdb.org/t/p/w\""
     }
 
     buildTypes {

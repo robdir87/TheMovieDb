@@ -36,6 +36,7 @@ ext.libraries = [
     // Support Library
     supportLibrary : "com.android.support:appcompat-v7:$versions.supportLibraryVersion",
     designLibrary : "com.android.support:design:$versions.supportLibraryVersion",
+    cardView: "com.android.support:cardview-v7:$versions.supportLibraryVersion",
 
     // Dependency Injection
     dagger : "com.google.dagger:dagger:$versions.daggerVersion",

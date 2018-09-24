@@ -65,6 +65,7 @@ dependencies {
 
     implementation libraries.supportLibrary
     implementation libraries.designLibrary
+    implementation libraries.cardView
 
     // Dependency Injection
     implementation libraries.dagger

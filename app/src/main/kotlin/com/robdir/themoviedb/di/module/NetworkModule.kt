@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.robdir.themoviedb.BuildConfig
 import com.robdir.themoviedb.di.AppScope
+import com.robdir.themoviedb.di.PosterUrlQualifier
 import com.squareup.picasso.Picasso
 import dagger.Module
 import dagger.Provides
@@ -17,7 +18,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 private const val TIMEOUT = 30000L
-private const val BASE_URL = "https://api.themoviedb.org/3/"
 
 @Module
 object NetworkModule {
@@ -72,7 +72,7 @@ object NetworkModule {
         callAdapterFactory: CallAdapter.Factory
     ): Retrofit =
         Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(BuildConfig.BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(gsonConverterFactory)
             .addCallAdapterFactory(callAdapterFactory)
@@ -81,4 +81,9 @@ object NetworkModule {
     @Provides
     @JvmStatic
     fun providePicasso(): Picasso = Picasso.get()
+
+    @Provides
+    @JvmStatic
+    @PosterUrlQualifier
+    fun providesPosterUrl(): String = BuildConfig.POSTER_URL
 }

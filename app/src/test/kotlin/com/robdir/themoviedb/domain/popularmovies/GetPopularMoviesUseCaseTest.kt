@@ -10,17 +10,17 @@ import com.robdir.themoviedb.data.movies.MoviesRepositoryContract
 import com.robdir.themoviedb.domain.GenreNameMapper
 import com.robdir.themoviedb.domain.movies.Movie
 import com.robdir.themoviedb.domain.movies.MovieMapper
+import com.robdir.themoviedb.mock
 import io.reactivex.Single
 import io.reactivex.observers.TestObserver
 import org.junit.Test
 import org.mockito.BDDMockito.given
-import org.mockito.Mockito.mock
 
 class GetPopularMoviesUseCaseTest {
-    private val mockMoviesRepositoryContract = mock(MoviesRepositoryContract::class.java)
-    private val mockGenreRepositoryContract = mock(GenresRepositoryContract::class.java)
-    private val mockMovieMapper = mock(MovieMapper::class.java)
-    private val mockGenreNameMapper = mock(GenreNameMapper::class.java)
+    private val mockMoviesRepositoryContract = mock<MoviesRepositoryContract>()
+    private val mockGenreRepositoryContract = mock<GenresRepositoryContract>()
+    private val mockMovieMapper = mock<MovieMapper>()
+    private val mockGenreNameMapper = mock<GenreNameMapper>()
 
     private val getPopularMovieUseCase =
         GetPopularMoviesUseCase(mockMoviesRepositoryContract, mockGenreRepositoryContract, mockMovieMapper, mockGenreNameMapper)

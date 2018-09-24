@@ -1,17 +1,17 @@
 package com.robdir.themoviedb.data.movies
 
 import com.robdir.themoviedb.data.MovieApi
+import com.robdir.themoviedb.mock
 import io.reactivex.Single
 import io.reactivex.observers.TestObserver
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.BDDMockito.given
-import org.mockito.Mockito.mock
 
 class MoviesRepositoryTest {
 
-    private val mockMovieApi = mock(MovieApi::class.java)
+    private val mockMovieApi = mock<MovieApi>()
     private val popularMoviesRepository = MoviesRepository(mockMovieApi)
 
     @Test

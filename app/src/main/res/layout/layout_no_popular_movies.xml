@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhiteOpaque">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/textViewNoPopularMoviesMessage"
+        app:srcCompat="@drawable/ic_empty_movie_list"
+        android:layout_centerHorizontal="true"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/textViewNoPopularMoviesMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/margin_regular"
+        android:layout_marginBottom="@dimen/margin_large"
+        android:text="@string/no_popular_movies_error_message"
+        android:textColor="@color/colorTextPrimary"
+        android:textSize="@dimen/text_size_regular" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/textViewNoPopularMoviesAction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewNoPopularMoviesMessage"
+        android:gravity="center"
+        android:text="@string/action_try_again"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/text_size_regular" />
+
+</RelativeLayout>

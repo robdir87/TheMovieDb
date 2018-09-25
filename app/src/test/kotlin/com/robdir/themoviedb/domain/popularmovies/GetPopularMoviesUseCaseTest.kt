@@ -1,6 +1,6 @@
 package com.robdir.themoviedb.domain.popularmovies
 
-import com.robdir.themoviedb.MockDataProvider.createGenreEntity
+import com.robdir.themoviedb.MockDataProvider.createMockGenreEntity
 import com.robdir.themoviedb.MockDataProvider.createMockMovie
 import com.robdir.themoviedb.MockDataProvider.createMockMovieEntity
 import com.robdir.themoviedb.MockDataProvider.mockGenreId
@@ -27,7 +27,7 @@ class GetPopularMoviesUseCaseTest {
 
     private val testObserver = TestObserver<List<Movie>>()
     private val pageNumber = 1
-    private val genreEntities = listOf(createGenreEntity())
+    private val genreEntities = listOf(createMockGenreEntity())
 
     @Test
     fun `WHEN getPopularMovies is called AND a repository fails THEN verify an exception is returned`() {

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_regular">12dp</dimen>
+    <dimen name="margin_large">18dp</dimen>
+
+    <dimen name="padding_regular">8dp</dimen>
+
+    <dimen name="text_size_xsmall">10sp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_regular">14sp</dimen>
+
+    <dimen name="movie_thumbnail_width">108dp</dimen>
+    <dimen name="movie_thumbnail_height">160dp</dimen>
+    <dimen name="movie_card_margin">4dp</dimen>
+
+    <dimen name="app_bar_layout_elevation">2dp</dimen>
+</resources>

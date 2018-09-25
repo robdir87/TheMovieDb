@@ -2,6 +2,8 @@ package com.robdir.themoviedb.di.module
 
 import android.content.Context
 import com.robdir.themoviedb.App
+import com.robdir.themoviedb.core.ReactivexSchedulerProvider
+import com.robdir.themoviedb.core.SchedulerProvider
 import com.robdir.themoviedb.data.MovieApi
 import com.robdir.themoviedb.di.AppScope
 import dagger.Binds
@@ -16,6 +18,10 @@ object AppModule {
     interface Binder {
         @Binds
         fun provideContext(app: App): Context
+
+        @Binds
+        @AppScope
+        fun provideSchedulerProvider(reactivexSchedulerProvider: ReactivexSchedulerProvider): SchedulerProvider
     }
 
     @Provides

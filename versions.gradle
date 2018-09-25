@@ -26,7 +26,8 @@ ext.versions = [
     // Testing
     jUnitVersion: '4.12',
     mockitoVersion: '2.10.0',
-    testRunnerVersion: '1.0.1'
+    testRunnerVersion: '1.0.1',
+    archCoreTestingVersion: '1.1.1'
 ]
 
 ext.libraries = [
@@ -65,5 +66,6 @@ ext.libraries = [
     junit : "junit:junit:$versions.jUnitVersion",
     mockitoCore : "org.mockito:mockito-core:$versions.mockitoVersion",
     testRunner : "com.android.support.test:runner:$versions.testRunnerVersion",
-    kotlinTest : "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlinVersion"
+    kotlinTest : "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlinVersion",
+    archCoreTesting: "android.arch.core:core-testing:$versions.archCoreTestingVersion"
 ]

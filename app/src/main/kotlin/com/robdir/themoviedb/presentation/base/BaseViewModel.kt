@@ -9,5 +9,4 @@ abstract class BaseViewModel(protected val schedulerProvider: SchedulerProvider)
 
     val networkError: MutableLiveData<TheMovieDbError> = MutableLiveData()
     val error: MutableLiveData<TheMovieDbError> = MutableLiveData()
-    val isLoading: MutableLiveData<Boolean> = MutableLiveData()
 }

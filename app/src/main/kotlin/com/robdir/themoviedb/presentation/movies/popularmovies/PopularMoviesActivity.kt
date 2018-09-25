@@ -94,8 +94,9 @@ class PopularMoviesActivity :
     private fun displayMovies(movies: List<MovieModel>) {
         swipeRefreshLayoutMovies.visible()
         swipeRefreshLayoutMovies.isRefreshing = false
+
         recyclerViewMovies.visible()
-        layoutEmptyPopularMovieList.gone()
+        layoutNoPopularMovies.gone()
 
         movieAdapter.movies = movies
     }
@@ -118,7 +119,7 @@ class PopularMoviesActivity :
         swipeRefreshLayoutMovies.gone()
         swipeRefreshLayoutMovies.isRefreshing = false
 
-        layoutEmptyPopularMovieList.visible()
+        layoutNoPopularMovies.visible()
         textViewNoPopularMoviesMessage.setText(stringResId)
     }
     // endregion

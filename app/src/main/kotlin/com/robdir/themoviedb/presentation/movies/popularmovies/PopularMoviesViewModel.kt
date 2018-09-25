@@ -15,7 +15,7 @@ class PopularMoviesViewModel @Inject constructor(
     schedulerProvider: SchedulerProvider
 ) : BaseViewModel(schedulerProvider) {
 
-    var movies: MutableLiveData<List<MovieModel>> = MutableLiveData()
+    val movies: MutableLiveData<List<MovieModel>> = MutableLiveData()
 
     fun getPopularMovies() {
         isLoading.value = true

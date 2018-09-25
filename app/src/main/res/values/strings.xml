@@ -1,14 +1,11 @@
 <resources>
     <string name="app_name">TheMovieDb</string>
 
-    <!-- Common alerts -->
-    <string name="alert_action_ok">OK</string>
-    <string name="alert_action_cancel">CANCEL</string>
-    <string name="alert_action_try_again">TRY AGAIN</string>
     <string name="network_error_message">Please check your internet connection.</string>
-    <string name="generic_error">We\'re sorry, something went wrong. Please try again.</string>
+    <string name="generic_error_message">We\'re sorry, something went wrong. Please try again.</string>
+    <string name="no_popular_movies_error_message">Popular movies not available.</string>
+
+    <string name="action_try_again">TRY AGAIN</string>
 
     <string name="popular_movies_toolbar_title">Popular Movies</string>
-    <string name="popular_movies_empty_list_message">Popular movies not available.</string>
-    <string name="popular_movies_empty_list_action">TRY AGAIN</string>
 </resources>

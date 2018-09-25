@@ -7,7 +7,7 @@ import com.robdir.themoviedb.presentation.common.TheMovieDbError
 
 abstract class BaseViewModel(protected val schedulerProvider: SchedulerProvider) : ViewModel() {
 
-    var networkError: MutableLiveData<TheMovieDbError> = MutableLiveData()
-    var error: MutableLiveData<TheMovieDbError> = MutableLiveData()
-    var isLoading: MutableLiveData<Boolean> = MutableLiveData()
+    val networkError: MutableLiveData<TheMovieDbError> = MutableLiveData()
+    val error: MutableLiveData<TheMovieDbError> = MutableLiveData()
+    val isLoading: MutableLiveData<Boolean> = MutableLiveData()
 }

@@ -7,6 +7,7 @@ import com.robdir.themoviedb.presentation.common.inflate
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.layout_list_item_movie.view.*
 import javax.inject.Inject
+import kotlin.properties.Delegates
 
 class MovieAdapter @Inject constructor(
     private val picasso: Picasso
@@ -18,7 +19,7 @@ class MovieAdapter @Inject constructor(
 
     var callback: Callback? = null
 
-    private var movies: MutableList<MovieModel> = mutableListOf()
+    var movies: List<MovieModel> by Delegates.observable(emptyList()) { _, _, _ -> notifyDataSetChanged() }
 
     // region Override methods
     override fun getItemCount(): Int = movies.size
@@ -29,18 +30,6 @@ class MovieAdapter @Inject constructor(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         MovieViewHolder(parent)
-    // endregion
-
-    // region Public methods
-    fun addMovies(movies: List<MovieModel>) {
-        this.movies.addAll(movies)
-        notifyDataSetChanged()
-    }
-
-    fun clear() {
-        movies.clear()
-        notifyDataSetChanged()
-    }
     // endregion
 
     inner class MovieViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(

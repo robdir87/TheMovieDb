@@ -10,7 +10,6 @@ import com.robdir.themoviedb.R
 import com.robdir.themoviedb.presentation.base.BaseActivity
 import com.robdir.themoviedb.presentation.common.TheMovieDbError
 import com.robdir.themoviedb.presentation.common.gone
-import com.robdir.themoviedb.presentation.common.showConfirmCancelAlert
 import com.robdir.themoviedb.presentation.common.visible
 import com.robdir.themoviedb.presentation.common.visibleIf
 import com.robdir.themoviedb.presentation.movies.common.MovieAdapter
@@ -56,7 +55,7 @@ class PopularMoviesActivity :
                     )
 
                     error.observe(this@PopularMoviesActivity,
-                        Observer<TheMovieDbError> { manageError(R.string.generic_error) }
+                        Observer<TheMovieDbError> { manageError(R.string.no_popular_movies_error_message) }
                     )
 
                     networkError.observe(this@PopularMoviesActivity,
@@ -64,7 +63,7 @@ class PopularMoviesActivity :
                     )
                 }
 
-        textViewPopularMovieEmptyListAction.setOnClickListener { loadPopularMovies() }
+        textViewNoPopularMoviesAction.setOnClickListener { loadPopularMovies() }
 
         loadPopularMovies()
     }
@@ -80,7 +79,6 @@ class PopularMoviesActivity :
     private fun setupRecyclerViewMovies() {
         swipeRefreshLayoutMovies.apply {
             setOnRefreshListener {
-                movieAdapter.clear()
                 loadPopularMovies()
             }
             setColorSchemeResources(R.color.colorAccent)
@@ -99,7 +97,7 @@ class PopularMoviesActivity :
         recyclerViewMovies.visible()
         layoutEmptyPopularMovieList.gone()
 
-        movieAdapter.addMovies(movies)
+        movieAdapter.movies = movies
     }
 
     private fun loadPopularMovies() {
@@ -115,17 +113,13 @@ class PopularMoviesActivity :
     }
 
     private fun manageError(@StringRes stringResId: Int) {
+        movieAdapter.movies = emptyList()
+
         swipeRefreshLayoutMovies.gone()
         swipeRefreshLayoutMovies.isRefreshing = false
 
         layoutEmptyPopularMovieList.visible()
-
-        showConfirmCancelAlert(
-            message = getString(stringResId),
-            confirmButtonLabel = getString(R.string.alert_action_try_again),
-            onConfirmButtonClicked = { _, _ -> loadPopularMovies() },
-            cancelButtonLabel = getString(R.string.alert_action_ok)
-        )
+        textViewNoPopularMoviesMessage.setText(stringResId)
     }
     // endregion
 }

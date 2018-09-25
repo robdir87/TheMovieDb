@@ -1,9 +1,13 @@
 package com.robdir.themoviedb.di.module
 
+import android.content.Context
+import android.net.ConnectivityManager
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.robdir.themoviedb.BuildConfig
+import com.robdir.themoviedb.core.DeviceNetworkInfoProvider
+import com.robdir.themoviedb.core.NetworkInfoProvider
 import com.robdir.themoviedb.di.AppScope
 import com.robdir.themoviedb.di.PosterUrlQualifier
 import com.squareup.picasso.Picasso
@@ -86,4 +90,9 @@ object NetworkModule {
     @JvmStatic
     @PosterUrlQualifier
     fun providesPosterUrl(): String = BuildConfig.POSTER_URL
+
+    @Provides
+    @JvmStatic
+    fun provideNetworkInfoProvider(context: Context): NetworkInfoProvider =
+        DeviceNetworkInfoProvider(context.getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager)
 }

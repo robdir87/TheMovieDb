@@ -1,17 +1,20 @@
 package com.robdir.themoviedb.presentation.movies.popularmovies
 
 import android.arch.lifecycle.MutableLiveData
+import com.robdir.themoviedb.core.NetworkInfoProvider
 import com.robdir.themoviedb.core.SchedulerProvider
 import com.robdir.themoviedb.domain.popularmovies.GetPopularMoviesContract
 import com.robdir.themoviedb.presentation.base.BaseViewModel
 import com.robdir.themoviedb.presentation.common.TheMovieDbError
 import com.robdir.themoviedb.presentation.movies.common.MovieModel
 import com.robdir.themoviedb.presentation.movies.common.MovieModelMapper
+import java.io.IOException
 import javax.inject.Inject
 
 class PopularMoviesViewModel @Inject constructor(
     private val getPopularMoviesContract: GetPopularMoviesContract,
     private val movieModelMapper: MovieModelMapper,
+    private val networkInfoProvider: NetworkInfoProvider,
     schedulerProvider: SchedulerProvider
 ) : BaseViewModel(schedulerProvider) {
 
@@ -25,14 +28,18 @@ class PopularMoviesViewModel @Inject constructor(
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.mainThread())
             .subscribe(
-                {
+                { movies ->
                     isLoading.value = false
-                    movies.value = it
+                    this.movies.value = movies
                 },
-                {
+                { error ->
                     isLoading.value = false
-                    // TODO: check internet connection
-                    error.value = TheMovieDbError()
+
+                    if (error is IOException && !networkInfoProvider.isNetworkAvailable()) {
+                        this.networkError.value = TheMovieDbError()
+                    } else {
+                        this.error.value = TheMovieDbError()
+                    }
                 }
             )
     }

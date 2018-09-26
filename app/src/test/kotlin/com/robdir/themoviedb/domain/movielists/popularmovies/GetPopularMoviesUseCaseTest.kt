@@ -8,11 +8,9 @@ import com.robdir.themoviedb.MockDataProvider.mockGenreName
 import com.robdir.themoviedb.data.genres.GenresRepositoryContract
 import com.robdir.themoviedb.data.movies.MoviesRepositoryContract
 import com.robdir.themoviedb.domain.GenreNameMapper
-import com.robdir.themoviedb.domain.movielists.common.Movie
 import com.robdir.themoviedb.domain.movielists.common.MovieMapper
 import com.robdir.themoviedb.mock
 import io.reactivex.Single
-import io.reactivex.observers.TestObserver
 import org.junit.Test
 import org.mockito.BDDMockito.given
 
@@ -25,7 +23,6 @@ class GetPopularMoviesUseCaseTest {
     private val getPopularMovieUseCase =
         GetPopularMoviesUseCase(mockMoviesRepositoryContract, mockGenreRepositoryContract, mockMovieMapper, mockGenreNameMapper)
 
-    private val testObserver = TestObserver<List<Movie>>()
     private val pageNumber = 1
     private val genreEntities = listOf(createMockGenreEntity())
 
@@ -37,11 +34,10 @@ class GetPopularMoviesUseCaseTest {
         given(mockGenreRepositoryContract.getGenres())
             .willReturn(Single.just(genreEntities))
 
-        // Act
-        getPopularMovieUseCase.getPopularMovies(pageNumber).subscribe(testObserver)
-
-        // Arrange
-        testObserver.assertError(Exception::class.java)
+        // Act && Assert
+        getPopularMovieUseCase.getPopularMovies(pageNumber)
+            .test()
+            .assertError(Exception::class.java)
     }
 
     @Test
@@ -60,10 +56,9 @@ class GetPopularMoviesUseCaseTest {
         given(mockGenreNameMapper.toNameMap(genreEntities))
             .willReturn(genreNameMap)
 
-        // Act
-        getPopularMovieUseCase.getPopularMovies(pageNumber).subscribe(testObserver)
-
-        // Assert
-        testObserver.assertResult(movies)
+        // Act & Assert
+        getPopularMovieUseCase.getPopularMovies(pageNumber)
+            .test()
+            .assertResult(movies)
     }
 }

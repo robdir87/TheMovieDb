@@ -3,7 +3,6 @@ package com.robdir.themoviedb.data.genres
 import com.robdir.themoviedb.data.MovieApi
 import com.robdir.themoviedb.mock
 import io.reactivex.Single
-import io.reactivex.observers.TestObserver
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.BDDMockito.given
@@ -12,7 +11,6 @@ class GenresRepositoryTest {
 
     private val mockMovieApi = mock<MovieApi>()
     private val genreRepository = GenresRepository(mockMovieApi)
-    private val testObserver = TestObserver<List<GenreEntity>>()
 
     @Test
     fun `WHEN getGenres is called THEN verify genres are fetched via the api`() {
@@ -23,10 +21,9 @@ class GenresRepositoryTest {
         given(mockMovieApi.getGenres(apiKey = anyString(), language = anyString()))
             .willReturn(Single.just(getGenresResponse))
 
-        // Act
-        genreRepository.getGenres().subscribe(testObserver)
-
-        // Assert
-        testObserver.assertResult(genreList)
+        // Act & Assert
+        genreRepository.getGenres()
+            .test()
+            .assertResult(genreList)
     }
 }

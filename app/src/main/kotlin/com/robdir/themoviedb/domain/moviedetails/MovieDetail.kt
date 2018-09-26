@@ -1,10 +1,10 @@
-package com.robdir.themoviedb.data.movies
+package com.robdir.themoviedb.domain.moviedetails
 
-data class MovieDetailEntity(
+data class MovieDetail(
     val id: Int,
     val homepage: String?,
     val overview: String?,
     val runtime: Int?,
     val revenue: Int,
-    val spokenLanguages: List<LanguageEntity>
+    val spokenLanguages: List<String>
 )

@@ -10,7 +10,7 @@ data class MovieModel(
     val thumbnailUrl: String,
     val posterUrl: String,
     val releaseYear: String,
-    val genres: String
+    val genres: List<String>
 ) : Parcelable {
 
     companion object {
@@ -24,7 +24,7 @@ data class MovieModel(
                     thumbnailUrl = source.readString().orEmpty(),
                     posterUrl = source.readString().orEmpty(),
                     releaseYear = source.readString().orEmpty(),
-                    genres = source.readString().orEmpty()
+                    genres = arrayListOf<String>().apply { source.readStringList(this) }
                 )
 
             override fun newArray(size: Int): Array<MovieModel?> = arrayOfNulls(size)
@@ -40,6 +40,6 @@ data class MovieModel(
         writeString(thumbnailUrl)
         writeString(posterUrl)
         writeString(releaseYear)
-        writeString(genres)
+        writeStringList(genres)
     }
 }

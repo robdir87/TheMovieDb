@@ -13,13 +13,13 @@ class MovieDetailMapperTest {
     private val movieDetailMapper = MovieDetailMapper()
 
     @Test
-    fun `WHEN toDomainModel is called AND a MovieDetailEntity is received THEN a MovieDetail is returned`() {
+    fun `WHEN toDomainModel is called AND a MovieDetailEntity is received THEN verify a MovieDetail is returned`() {
         // Arrange, Act & Assert
         assertEquals(createMockMovieDetail(), movieDetailMapper.toDomainModel(createMockMovieDetailEntity()))
     }
 
     @Test
-    fun `WHEN toDomainModel is called AND a MovieDetailEntity is received AND spokenLanguages contains a language with no name THEN a MovieDetail is returned AND the language with no name is discarded`() {
+    fun `WHEN toDomainModel is called AND a MovieDetailEntity is received AND spokenLanguages contains a language with no name THEN verify a MovieDetail is returned AND the language with no name is discarded`() {
         // Arrange, Act & Assert
         assertEquals(
             createMockMovieDetail(spokenLanguages = listOf(mockLanguageName)),

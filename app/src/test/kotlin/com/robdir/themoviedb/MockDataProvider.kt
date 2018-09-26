@@ -6,6 +6,7 @@ import com.robdir.themoviedb.data.movies.MovieDetailEntity
 import com.robdir.themoviedb.data.movies.MovieEntity
 import com.robdir.themoviedb.domain.moviedetails.MovieDetail
 import com.robdir.themoviedb.domain.movielists.common.Movie
+import com.robdir.themoviedb.presentation.moviedetails.MovieDetailModel
 import com.robdir.themoviedb.presentation.movielists.common.MovieModel
 import com.robdir.themoviedb.presentation.movielists.common.POSTER_WIDTH
 import com.robdir.themoviedb.presentation.movielists.common.THUMBNAIL_WIDTH
@@ -43,59 +44,65 @@ object MockDataProvider {
     val mockMovieGenreMap = mapOf(mockGenreId to mockGenreName, mockAnotherGenreId to mockAnotherGenreName)
 
     // region Provider methods
-    fun createMockMovieEntity(): MovieEntity =
-        MovieEntity(
-            mockMovieId,
-            mockMovieTitle,
-            mockMoviePopularity,
-            mockMoviePosterPath,
-            mockMovieReleaseDate,
-            mockMovieGenreIds
-        )
+    fun createMockMovieEntity() = MovieEntity(
+        mockMovieId,
+        mockMovieTitle,
+        mockMoviePopularity,
+        mockMoviePosterPath,
+        mockMovieReleaseDate,
+        mockMovieGenreIds
+    )
 
-    fun createMockMovie(genreNames: List<String> = mockMovieGenreNames): Movie =
-        Movie(
-            mockMovieId,
-            mockMovieTitle,
-            mockMoviePopularity,
-            mockMoviePosterPath,
-            mockMovieReleaseDate,
-            genreNames
-        )
+    fun createMockMovie() = Movie(
+        mockMovieId,
+        mockMovieTitle,
+        mockMoviePopularity,
+        mockMoviePosterPath,
+        mockMovieReleaseDate,
+        mockMovieGenreNames
+    )
 
-    fun createMockGenreEntity(): GenreEntity = GenreEntity(mockGenreId, mockGenreName)
+    fun createMockGenreEntity() = GenreEntity(mockGenreId, mockGenreName)
 
-    fun createMockMovieModel(genres: String = mockGenreName): MovieModel =
-        MovieModel(
-            mockMovieId,
-            mockMovieTitle,
-            mockRoundedPopularity,
-            mockMovieThumbnailUrl,
-            mockMoviePosterUrl,
-            mockMovieReleaseYear,
-            genres
-        )
+    fun createMockMovieModel(genres: List<String> = mockMovieGenreNames) = MovieModel(
+        mockMovieId,
+        mockMovieTitle,
+        mockRoundedPopularity,
+        mockMovieThumbnailUrl,
+        mockMoviePosterUrl,
+        mockMovieReleaseYear,
+        genres
+    )
 
     fun createMockLanguageEntity(): LanguageEntity = LanguageEntity(mockLanguageCode, mockLanguageName)
 
-    fun createMockMovieDetailEntity(spokenLanguages: List<LanguageEntity> = listOf(createMockLanguageEntity())): MovieDetailEntity =
-        MovieDetailEntity(
-            mockMovieId,
-            mockMovieHomepage,
-            mockMovieOverview,
-            mockMovieRuntime,
-            mockMovieRevenue,
-            spokenLanguages
-        )
+    fun createMockMovieDetailEntity(
+        spokenLanguages: List<LanguageEntity> = listOf(createMockLanguageEntity())
+    ) = MovieDetailEntity(
+        mockMovieId,
+        mockMovieHomepage,
+        mockMovieOverview,
+        mockMovieRuntime,
+        mockMovieRevenue,
+        spokenLanguages
+    )
 
-    fun createMockMovieDetail(spokenLanguages: List<String> = listOf(mockLanguageName)): MovieDetail =
-        MovieDetail(
-            mockMovieId,
-            mockMovieHomepage,
-            mockMovieOverview,
-            mockMovieRuntime,
-            mockMovieRevenue,
-            spokenLanguages
-        )
+    fun createMockMovieDetail(spokenLanguages: List<String> = listOf(mockLanguageName)) = MovieDetail(
+        mockMovieId,
+        mockMovieHomepage,
+        mockMovieOverview,
+        mockMovieRuntime,
+        mockMovieRevenue,
+        spokenLanguages
+    )
+
+    fun createMockMovieDetailModel() = MovieDetailModel(
+        mockMovieId,
+        mockMovieHomepage,
+        mockMovieOverview,
+        mockMovieRuntime,
+        mockMovieRevenue,
+        listOf(mockLanguageName)
+    )
     // endregion
 }

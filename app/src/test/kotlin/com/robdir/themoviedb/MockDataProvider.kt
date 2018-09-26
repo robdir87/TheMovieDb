@@ -4,6 +4,7 @@ import com.robdir.themoviedb.data.genres.GenreEntity
 import com.robdir.themoviedb.data.movies.LanguageEntity
 import com.robdir.themoviedb.data.movies.MovieDetailEntity
 import com.robdir.themoviedb.data.movies.MovieEntity
+import com.robdir.themoviedb.domain.moviedetails.MovieDetail
 import com.robdir.themoviedb.domain.movielists.common.Movie
 import com.robdir.themoviedb.presentation.movielists.common.MovieModel
 import com.robdir.themoviedb.presentation.movielists.common.POSTER_WIDTH
@@ -85,6 +86,16 @@ object MockDataProvider {
             mockMovieRuntime,
             mockMovieRevenue,
             listOf(createMockLanguageEntity())
+        )
+
+    fun createMockMovieDetail(): MovieDetail =
+        MovieDetail(
+            mockMovieId,
+            mockMovieHomepage,
+            mockMovieOverview,
+            mockMovieRuntime,
+            mockMovieRevenue,
+            listOf(mockLanguageName)
         )
     // endregion
 }

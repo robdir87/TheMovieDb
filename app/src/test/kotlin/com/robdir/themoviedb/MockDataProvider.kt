@@ -78,24 +78,24 @@ object MockDataProvider {
 
     fun createMockLanguageEntity(): LanguageEntity = LanguageEntity(mockLanguageCode, mockLanguageName)
 
-    fun createMockMovieDetailEntity(): MovieDetailEntity =
+    fun createMockMovieDetailEntity(spokenLanguages: List<LanguageEntity> = listOf(createMockLanguageEntity())): MovieDetailEntity =
         MovieDetailEntity(
             mockMovieId,
             mockMovieHomepage,
             mockMovieOverview,
             mockMovieRuntime,
             mockMovieRevenue,
-            listOf(createMockLanguageEntity())
+            spokenLanguages
         )
 
-    fun createMockMovieDetail(): MovieDetail =
+    fun createMockMovieDetail(spokenLanguages: List<String> = listOf(mockLanguageName)): MovieDetail =
         MovieDetail(
             mockMovieId,
             mockMovieHomepage,
             mockMovieOverview,
             mockMovieRuntime,
             mockMovieRevenue,
-            listOf(mockLanguageName)
+            spokenLanguages
         )
     // endregion
 }

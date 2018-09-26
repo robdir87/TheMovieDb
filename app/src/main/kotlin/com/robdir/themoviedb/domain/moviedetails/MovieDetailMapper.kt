@@ -11,7 +11,7 @@ class MovieDetailMapper @Inject constructor() {
             overview = overview,
             runtime = runtime,
             revenue = revenue,
-            spokenLanguages = spokenLanguages.map { it.name }
+            spokenLanguages = spokenLanguages.map { it.name }.filter { it.isNotEmpty() }
         )
     }
 }

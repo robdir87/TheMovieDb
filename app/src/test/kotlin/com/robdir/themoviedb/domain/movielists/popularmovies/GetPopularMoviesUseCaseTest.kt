@@ -1,4 +1,4 @@
-package com.robdir.themoviedb.domain.popularmovies
+package com.robdir.themoviedb.domain.movielists.popularmovies
 
 import com.robdir.themoviedb.MockDataProvider.createMockGenreEntity
 import com.robdir.themoviedb.MockDataProvider.createMockMovie
@@ -8,8 +8,8 @@ import com.robdir.themoviedb.MockDataProvider.mockGenreName
 import com.robdir.themoviedb.data.genres.GenresRepositoryContract
 import com.robdir.themoviedb.data.movies.MoviesRepositoryContract
 import com.robdir.themoviedb.domain.GenreNameMapper
-import com.robdir.themoviedb.domain.movies.Movie
-import com.robdir.themoviedb.domain.movies.MovieMapper
+import com.robdir.themoviedb.domain.movielists.common.Movie
+import com.robdir.themoviedb.domain.movielists.common.MovieMapper
 import com.robdir.themoviedb.mock
 import io.reactivex.Single
 import io.reactivex.observers.TestObserver

@@ -1,4 +1,4 @@
-package com.robdir.themoviedb.presentation.movies.common
+package com.robdir.themoviedb.presentation.movielists.common
 
 import android.os.Parcel
 import android.os.Parcelable

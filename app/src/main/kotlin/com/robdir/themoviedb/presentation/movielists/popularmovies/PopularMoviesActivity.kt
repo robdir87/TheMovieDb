@@ -1,4 +1,4 @@
-package com.robdir.themoviedb.presentation.movies.popularmovies
+package com.robdir.themoviedb.presentation.movielists.popularmovies
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
@@ -12,8 +12,8 @@ import com.robdir.themoviedb.presentation.common.TheMovieDbError
 import com.robdir.themoviedb.presentation.common.gone
 import com.robdir.themoviedb.presentation.common.visible
 import com.robdir.themoviedb.presentation.common.visibleIf
-import com.robdir.themoviedb.presentation.movies.common.MovieAdapter
-import com.robdir.themoviedb.presentation.movies.common.MovieModel
+import com.robdir.themoviedb.presentation.movielists.common.MovieAdapter
+import com.robdir.themoviedb.presentation.movielists.common.MovieModel
 import kotlinx.android.synthetic.main.activity_popular_movies.*
 import kotlinx.android.synthetic.main.layout_no_popular_movies.*
 import javax.inject.Inject

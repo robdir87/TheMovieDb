@@ -13,7 +13,7 @@
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.robdir.themoviedb.presentation.movies.popularmovies.PopularMoviesActivity"
+            android:name="com.robdir.themoviedb.presentation.movielists.popularmovies.PopularMoviesActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

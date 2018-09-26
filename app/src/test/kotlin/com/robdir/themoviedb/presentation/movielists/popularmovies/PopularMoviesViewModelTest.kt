@@ -1,15 +1,15 @@
-package com.robdir.themoviedb.presentation.movies.popularmovies
+package com.robdir.themoviedb.presentation.movielists.popularmovies
 
 import android.arch.lifecycle.Observer
 import com.robdir.themoviedb.MockDataProvider.createMockMovie
 import com.robdir.themoviedb.MockDataProvider.createMockMovieModel
 import com.robdir.themoviedb.core.NetworkInfoProvider
-import com.robdir.themoviedb.domain.popularmovies.GetPopularMoviesContract
+import com.robdir.themoviedb.domain.movielists.popularmovies.GetPopularMoviesContract
 import com.robdir.themoviedb.mock
 import com.robdir.themoviedb.presentation.common.BaseViewModelTest
 import com.robdir.themoviedb.presentation.common.TheMovieDbError
-import com.robdir.themoviedb.presentation.movies.common.MovieModel
-import com.robdir.themoviedb.presentation.movies.common.MovieModelMapper
+import com.robdir.themoviedb.presentation.movielists.common.MovieModel
+import com.robdir.themoviedb.presentation.movielists.common.MovieModelMapper
 import io.reactivex.Single
 import org.junit.Assert.assertEquals
 import org.junit.Before

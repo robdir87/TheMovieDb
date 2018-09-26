@@ -2,7 +2,7 @@ package com.robdir.themoviedb.di.module.viewmodel
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
-import com.robdir.themoviedb.presentation.movies.popularmovies.PopularMoviesViewModel
+import com.robdir.themoviedb.presentation.movielists.popularmovies.PopularMoviesViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

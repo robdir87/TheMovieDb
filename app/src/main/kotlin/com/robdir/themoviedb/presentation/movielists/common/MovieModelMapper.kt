@@ -1,8 +1,8 @@
-package com.robdir.themoviedb.presentation.movies.common
+package com.robdir.themoviedb.presentation.movielists.common
 
 import android.support.annotation.VisibleForTesting
 import com.robdir.themoviedb.di.PosterUrlQualifier
-import com.robdir.themoviedb.domain.movies.Movie
+import com.robdir.themoviedb.domain.movielists.common.Movie
 import javax.inject.Inject
 import kotlin.math.roundToInt
 

@@ -11,7 +11,6 @@ const val POSTER_WIDTH = 500
 @VisibleForTesting
 const val THUMBNAIL_WIDTH = 110
 
-private const val GENRE_SEPARATOR = ", "
 private const val DATE_DELIMITER = "-"
 
 class MovieModelMapper @Inject constructor(@PosterUrlQualifier private val posterBaseUrl: String) {
@@ -24,7 +23,7 @@ class MovieModelMapper @Inject constructor(@PosterUrlQualifier private val poste
                 thumbnailUrl = "$posterBaseUrl$THUMBNAIL_WIDTH/$posterPath",
                 posterUrl = "$posterBaseUrl$POSTER_WIDTH/$posterPath",
                 releaseYear = releaseDate.substringBefore(DATE_DELIMITER),
-                genres = genreNames.joinToString(separator = GENRE_SEPARATOR)
+                genres = genreNames
             )
         }
 

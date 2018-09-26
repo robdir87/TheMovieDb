@@ -8,4 +8,7 @@
     <string name="action_try_again">TRY AGAIN</string>
 
     <string name="popular_movies_toolbar_title">Popular Movies</string>
+
+    <string name="genre_separator">,%s&#032;</string>
+    <string name="languages_separator">,%s&#032;</string>
 </resources>

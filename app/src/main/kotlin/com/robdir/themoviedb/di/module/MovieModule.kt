@@ -4,8 +4,8 @@ import com.robdir.themoviedb.data.genres.GenresRepository
 import com.robdir.themoviedb.data.genres.GenresRepositoryContract
 import com.robdir.themoviedb.data.movies.MoviesRepository
 import com.robdir.themoviedb.data.movies.MoviesRepositoryContract
-import com.robdir.themoviedb.domain.popularmovies.GetPopularMoviesContract
-import com.robdir.themoviedb.domain.popularmovies.GetPopularMoviesUseCase
+import com.robdir.themoviedb.domain.movielists.popularmovies.GetPopularMoviesContract
+import com.robdir.themoviedb.domain.movielists.popularmovies.GetPopularMoviesUseCase
 import dagger.Binds
 import dagger.Module
 

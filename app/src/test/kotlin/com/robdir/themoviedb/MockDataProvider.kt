@@ -2,10 +2,10 @@ package com.robdir.themoviedb
 
 import com.robdir.themoviedb.data.genres.GenreEntity
 import com.robdir.themoviedb.data.movies.MovieEntity
-import com.robdir.themoviedb.domain.movies.Movie
-import com.robdir.themoviedb.presentation.movies.common.MovieModel
-import com.robdir.themoviedb.presentation.movies.common.POSTER_WIDTH
-import com.robdir.themoviedb.presentation.movies.common.THUMBNAIL_WIDTH
+import com.robdir.themoviedb.domain.movielists.common.Movie
+import com.robdir.themoviedb.presentation.movielists.common.MovieModel
+import com.robdir.themoviedb.presentation.movielists.common.POSTER_WIDTH
+import com.robdir.themoviedb.presentation.movielists.common.THUMBNAIL_WIDTH
 
 object MockDataProvider {
     // Genre

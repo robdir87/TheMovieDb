@@ -1,4 +1,4 @@
-package com.robdir.themoviedb.presentation.movies.common
+package com.robdir.themoviedb.presentation.movielists.common
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup

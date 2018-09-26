@@ -1,6 +1,6 @@
-package com.robdir.themoviedb.domain.popularmovies
+package com.robdir.themoviedb.domain.movielists.popularmovies
 
-import com.robdir.themoviedb.domain.movies.Movie
+import com.robdir.themoviedb.domain.movielists.common.Movie
 import io.reactivex.Single
 
 interface GetPopularMoviesContract {

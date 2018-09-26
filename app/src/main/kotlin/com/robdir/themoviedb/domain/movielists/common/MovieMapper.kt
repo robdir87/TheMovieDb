@@ -1,4 +1,4 @@
-package com.robdir.themoviedb.domain.movies
+package com.robdir.themoviedb.domain.movielists.common
 
 import com.robdir.themoviedb.data.movies.MovieEntity
 import com.robdir.themoviedb.domain.GenreNameMapper

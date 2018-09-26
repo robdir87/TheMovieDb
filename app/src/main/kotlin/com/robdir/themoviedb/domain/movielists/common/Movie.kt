@@ -1,4 +1,4 @@
-package com.robdir.themoviedb.domain.movies
+package com.robdir.themoviedb.domain.movielists.common
 
 data class Movie(
     val id: Int,

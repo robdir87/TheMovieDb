@@ -1,4 +1,4 @@
-package com.robdir.themoviedb.domain.movies
+package com.robdir.themoviedb.domain.movielists.common
 
 import com.robdir.themoviedb.MockDataProvider.createMockMovie
 import com.robdir.themoviedb.MockDataProvider.createMockMovieEntity

@@ -10,4 +10,7 @@ class MoviesRepository @Inject constructor(
 
     override fun getPopularMovies(pageNumber: Int): Single<List<MovieEntity>> =
         movieApi.getPopularMovies().map { it.results }
+
+    override fun getMovieDetails(movieId: Int): Single<MovieDetailEntity> =
+        movieApi.getMovieDetails(movieId = movieId)
 }

@@ -6,5 +6,5 @@ data class MovieDetail(
     val overview: String?,
     val runtime: Int?,
     val revenue: Int,
-    val spokenLanguages: List<String>
+    val originalLanguage: String
 )

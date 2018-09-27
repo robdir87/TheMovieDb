@@ -5,4 +5,6 @@ import java.text.NumberFormat
 interface LocaleProvider {
 
     fun getNumberFormat(): NumberFormat
+
+    fun getDisplayLanguage(languageCode: String): String
 }

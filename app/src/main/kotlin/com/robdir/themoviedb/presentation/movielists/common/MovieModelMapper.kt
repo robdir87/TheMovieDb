@@ -21,7 +21,7 @@ class MovieModelMapper @Inject constructor(@PosterUrlQualifier private val poste
                 title = title,
                 popularity = popularity.roundToInt(),
                 thumbnailUrl = "$posterBaseUrl$THUMBNAIL_WIDTH$posterPath",
-                posterUrl = "$posterBaseUrl$POSTER_WIDTH/$posterPath",
+                posterUrl = "$posterBaseUrl$POSTER_WIDTH$posterPath",
                 releaseYear = releaseDate.substringBefore(DATE_DELIMITER),
                 genres = genreNames
             )

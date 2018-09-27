@@ -1,7 +1,6 @@
 package com.robdir.themoviedb
 
 import com.robdir.themoviedb.data.genres.GenreEntity
-import com.robdir.themoviedb.data.movies.LanguageEntity
 import com.robdir.themoviedb.data.movies.MovieDetailEntity
 import com.robdir.themoviedb.data.movies.MovieEntity
 import com.robdir.themoviedb.domain.moviedetails.MovieDetail
@@ -19,20 +18,20 @@ object MockDataProvider {
     const val mockAnotherGenreName = "Fantasy"
 
     // Language
-    const val mockLanguageCode = "en"
-    const val mockLanguageName = "English"
+    const val mockOriginalLanguageCode = "en"
+    const val mockOriginalLanguageName = "English"
 
     // Movie
     const val mockMovieId = 123
     private const val mockMovieTitle = "Some horror movie"
     private const val mockMoviePopularity = 7.1
     private const val mockRoundedPopularity = 7
-    private const val mockMoviePosterPath = "some-poster-path"
+    private const val mockMoviePosterPath = "/some-poster-path"
     private const val mockMovieReleaseDate = "2018-03-15"
     private const val mockMovieReleaseYear = "2018"
     const val mockMoviePosterBaseUrl = "http://some-base-url.com/w"
-    private const val mockMoviePosterUrl = "http://some-base-url.com/w$POSTER_WIDTH/$mockMoviePosterPath"
-    private const val mockMovieThumbnailUrl = "http://some-base-url.com/w$THUMBNAIL_WIDTH/$mockMoviePosterPath"
+    private const val mockMoviePosterUrl = "http://some-base-url.com/w$POSTER_WIDTH$mockMoviePosterPath"
+    private const val mockMovieThumbnailUrl = "http://some-base-url.com/w$THUMBNAIL_WIDTH$mockMoviePosterPath"
 
     private const val mockMovieHomepage = "http://some-homepage.com"
     private const val mockMovieOverview = "mock overview"
@@ -74,26 +73,22 @@ object MockDataProvider {
         genres
     )
 
-    fun createMockLanguageEntity(): LanguageEntity = LanguageEntity(mockLanguageCode, mockLanguageName)
-
-    fun createMockMovieDetailEntity(
-        spokenLanguages: List<LanguageEntity> = listOf(createMockLanguageEntity())
-    ) = MovieDetailEntity(
+    fun createMockMovieDetailEntity() = MovieDetailEntity(
         mockMovieId,
         mockMovieHomepage,
         mockMovieOverview,
         mockMovieRuntime,
         mockMovieRevenue,
-        spokenLanguages
+        mockOriginalLanguageCode
     )
 
-    fun createMockMovieDetail(spokenLanguages: List<String> = listOf(mockLanguageName)) = MovieDetail(
+    fun createMockMovieDetail() = MovieDetail(
         mockMovieId,
         mockMovieHomepage,
         mockMovieOverview,
         mockMovieRuntime,
         mockMovieRevenue,
-        spokenLanguages
+        mockOriginalLanguageName
     )
 
     fun createMockMovieDetailModel() = MovieDetailModel(
@@ -102,7 +97,7 @@ object MockDataProvider {
         mockMovieOverview,
         mockMovieRuntime,
         mockMovieRevenue,
-        listOf(mockLanguageName)
+        mockOriginalLanguageName
     )
     // endregion
 }

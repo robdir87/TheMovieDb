@@ -5,6 +5,7 @@ import com.robdir.themoviedb.di.module.ActivityBuilderModule
 import com.robdir.themoviedb.di.module.AppModule
 import com.robdir.themoviedb.di.module.MovieModule
 import com.robdir.themoviedb.di.module.NetworkModule
+import com.robdir.themoviedb.di.module.PersistenceModule
 import com.robdir.themoviedb.di.module.viewmodel.ViewModelModule
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -17,7 +18,8 @@ import dagger.android.support.AndroidSupportInjectionModule
         AppModule::class,
         NetworkModule::class,
         ViewModelModule::class,
-        MovieModule::class
+        MovieModule::class,
+        PersistenceModule::class
     ]
 )
 @AppScope

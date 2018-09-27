@@ -14,7 +14,7 @@
         android:padding="@dimen/margin_regular">
 
         <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/imageViewMovieThumbnail"
+            android:id="@+id/imageViewMoviePoster"
             android:layout_width="@dimen/movie_thumbnail_width"
             android:layout_height="@dimen/movie_thumbnail_height"
             android:scaleType="fitStart" />

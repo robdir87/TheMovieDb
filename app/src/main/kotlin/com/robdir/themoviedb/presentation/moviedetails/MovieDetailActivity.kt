@@ -12,9 +12,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.robdir.themoviedb.R
+import com.robdir.themoviedb.core.isLollipopOrLater
 import com.robdir.themoviedb.presentation.base.BaseActivity
 import com.robdir.themoviedb.presentation.common.visibleIf
 import com.robdir.themoviedb.presentation.movielists.common.MovieModel
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 import kotlinx.android.synthetic.main.layout_movie_description.view.*
@@ -46,6 +48,7 @@ class MovieDetailActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_detail)
+        supportPostponeEnterTransition()
 
         movieDetailViewModel =
             ViewModelProviders.of(this, viewModelFactory)[MovieDetailViewModel::class.java]
@@ -63,7 +66,20 @@ class MovieDetailActivity : BaseActivity() {
     // region Private methods
     private fun displayMovieBasicDataAndLoadDetail() {
         intent?.getParcelableExtra<MovieModel>(EXTRA_MOVIE)?.apply {
-            picasso.load(posterUrl).into(imageViewMoviePoster)
+
+            if (isLollipopOrLater()) imageViewMoviePoster.transitionName = "$id"
+
+            picasso.load(posterUrl)
+                .noFade()
+                .into(imageViewMoviePoster, object : Callback {
+                    override fun onSuccess() {
+                        supportStartPostponedEnterTransition()
+                    }
+
+                    override fun onError(e: java.lang.Exception?) {
+                        supportStartPostponedEnterTransition()
+                    }
+                })
 
             toolbarLayoutMovieDetail.title = title
 

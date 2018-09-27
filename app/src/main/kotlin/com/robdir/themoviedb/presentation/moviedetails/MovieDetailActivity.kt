@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.robdir.themoviedb.R
+import com.robdir.themoviedb.core.LocaleProvider
 import com.robdir.themoviedb.core.isLollipopOrLater
 import com.robdir.themoviedb.presentation.base.BaseActivity
 import com.robdir.themoviedb.presentation.common.visibleIf
@@ -40,6 +41,9 @@ class MovieDetailActivity : BaseActivity() {
 
     @Inject
     lateinit var picasso: Picasso
+
+    @Inject
+    lateinit var localeProvider: LocaleProvider
     // endregion
 
     private lateinit var movieDetailViewModel: MovieDetailViewModel
@@ -103,7 +107,7 @@ class MovieDetailActivity : BaseActivity() {
             layoutMovieDetailContainer.run {
                 layoutMovieDetailContainer.addDescriptionRow(overview)
                 runtime?.let { addDetailRow(R.string.movie_detail_runtime, getString(R.string.movie_detail_runtime_value, it)) }
-                addDetailRow(R.string.movie_detail_revenue, "\$$revenue")
+                addDetailRow(R.string.movie_detail_revenue, getString(R.string.movie_detail_revenue_format, localeProvider.getNumberFormat().format(revenue)))
                 addDetailRow(R.string.movie_detail_languages, spokenLanguages.joinToString(separator = context.getString(R.string.languages_separator)))
             }
         }

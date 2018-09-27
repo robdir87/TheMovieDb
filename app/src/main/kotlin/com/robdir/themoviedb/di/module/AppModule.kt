@@ -2,6 +2,8 @@ package com.robdir.themoviedb.di.module
 
 import android.content.Context
 import com.robdir.themoviedb.App
+import com.robdir.themoviedb.core.DeviceLocaleProvider
+import com.robdir.themoviedb.core.LocaleProvider
 import com.robdir.themoviedb.core.ReactivexSchedulerProvider
 import com.robdir.themoviedb.core.SchedulerProvider
 import com.robdir.themoviedb.data.MovieApi
@@ -22,6 +24,9 @@ object AppModule {
         @Binds
         @AppScope
         fun provideSchedulerProvider(reactivexSchedulerProvider: ReactivexSchedulerProvider): SchedulerProvider
+
+        @Binds
+        fun provideLocaleProvider(deviceLocaleProvider: DeviceLocaleProvider): LocaleProvider
     }
 
     @Provides

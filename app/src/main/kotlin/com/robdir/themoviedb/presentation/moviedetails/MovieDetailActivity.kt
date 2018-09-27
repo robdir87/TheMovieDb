@@ -60,19 +60,30 @@ class MovieDetailActivity : BaseActivity() {
                     movieDetail.observe(this@MovieDetailActivity,
                         Observer<MovieDetailModel> { movieDetail -> displayMovieDetail(movieDetail) }
                     )
-                    // TODO errors
                 }
 
+        setupToolbar()
         displayMovieBasicDataAndLoadDetail()
     }
     // endregion
 
+    // region Override methods
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+    // endregion
+
     // region Private methods
+    private fun setupToolbar() {
+        setSupportActionBar(toolbarMovieDetail)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
     private fun displayMovieBasicDataAndLoadDetail() {
         intent?.getParcelableExtra<MovieModel>(EXTRA_MOVIE)?.apply {
 
             if (isLollipopOrLater()) imageViewMoviePoster.transitionName = "$id"
-
             picasso.load(posterUrl)
                 .noFade()
                 .into(imageViewMoviePoster, object : Callback {
@@ -89,7 +100,10 @@ class MovieDetailActivity : BaseActivity() {
 
             layoutMovieDetailContainer.run {
                 addDetailRow(R.string.movie_detail_release_year, releaseYear)
-                addDetailRow(R.string.movie_detail_genres, genres.joinToString(context.getString(R.string.genre_separator)))
+                addDetailRow(
+                    R.string.movie_detail_genres,
+                    genres.joinToString(context.getString(R.string.genre_separator))
+                )
                 addDetailRow(R.string.movie_detail_popularity, "$popularity")
             }
 
@@ -107,8 +121,11 @@ class MovieDetailActivity : BaseActivity() {
             layoutMovieDetailContainer.run {
                 layoutMovieDetailContainer.addDescriptionRow(overview)
                 runtime?.let { addDetailRow(R.string.movie_detail_runtime, getString(R.string.movie_detail_runtime_value, it)) }
-                addDetailRow(R.string.movie_detail_revenue, getString(R.string.movie_detail_revenue_format, localeProvider.getNumberFormat().format(revenue)))
-                addDetailRow(R.string.movie_detail_languages, spokenLanguages.joinToString(separator = context.getString(R.string.languages_separator)))
+                addDetailRow(
+                    R.string.movie_detail_revenue,
+                    getString(R.string.movie_detail_revenue_format, localeProvider.getNumberFormat().format(revenue))
+                )
+                addDetailRow(R.string.movie_detail_language, originalLanguage)
             }
         }
     }

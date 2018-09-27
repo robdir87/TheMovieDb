@@ -1,9 +1,10 @@
 package com.robdir.themoviedb.domain.moviedetails
 
+import com.robdir.themoviedb.core.LocaleProvider
 import com.robdir.themoviedb.data.movies.MovieDetailEntity
 import javax.inject.Inject
 
-class MovieDetailMapper @Inject constructor() {
+class MovieDetailMapper @Inject constructor(private val localeProvider: LocaleProvider) {
     fun toDomainModel(movieDetailEntity: MovieDetailEntity): MovieDetail = with(movieDetailEntity) {
         MovieDetail(
             id = id,
@@ -11,7 +12,7 @@ class MovieDetailMapper @Inject constructor() {
             overview = overview,
             runtime = runtime,
             revenue = revenue,
-            spokenLanguages = spokenLanguages.map { it.name }.filter { it.isNotEmpty() }
+            originalLanguage = localeProvider.getDisplayLanguage(originalLanguage)
         )
     }
 }

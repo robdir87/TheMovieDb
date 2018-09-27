@@ -22,6 +22,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 private const val TIMEOUT = 30000L
+private const val ONE_DAY_IN_MILLISECONDS: Long = 24 * 60 * 60 * 1000
 
 @Module
 object NetworkModule {

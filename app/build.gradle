@@ -82,6 +82,8 @@ dependencies {
     // Architecture Components
     implementation libraries.room
     kapt libraries.roomCompiler
+    implementation libraries.lifecycle
+    kapt libraries.lifecycleCompiler
 
     // Retrofit
     implementation libraries.retrofit

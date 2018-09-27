@@ -17,6 +17,7 @@ ext.versions = [
     rxAndroidVersion: '2.1.0',
 
     roomVersion: '1.1.1',
+    lifecycleVersion: '1.1.1',
 
     retrofitVersion: '2.4.0',
     httpLoggingInterceptorVersion: '3.10.0',
@@ -52,6 +53,8 @@ ext.libraries = [
     // Architecture Components
     room: "android.arch.persistence.room:rxjava2:$versions.roomVersion",
     roomCompiler: "android.arch.persistence.room:compiler:$versions.roomVersion",
+    lifecycle: "android.arch.lifecycle:extensions:$versions.lifecycleVersion",
+    lifecycleCompiler: "android.arch.lifecycle:compiler:$versions.lifecycleVersion",
 
     // retrofit
     retrofit : "com.squareup.retrofit2:retrofit:$versions.retrofitVersion",

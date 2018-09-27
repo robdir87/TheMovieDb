@@ -8,4 +8,5 @@
     <color name="colorTextSecondary">#232b2b</color>
 
     <color name="colorWhiteOpaque">#F5F5F5</color>
+    <color name="semitransparentColorPrimary">#aa232b2b</color>
 </resources>

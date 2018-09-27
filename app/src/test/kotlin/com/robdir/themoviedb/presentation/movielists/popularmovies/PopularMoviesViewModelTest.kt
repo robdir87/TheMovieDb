@@ -3,20 +3,17 @@ package com.robdir.themoviedb.presentation.movielists.popularmovies
 import android.arch.lifecycle.Observer
 import com.robdir.themoviedb.MockDataProvider.createMockMovie
 import com.robdir.themoviedb.MockDataProvider.createMockMovieModel
-import com.robdir.themoviedb.core.NetworkInfoProvider
 import com.robdir.themoviedb.domain.movielists.popularmovies.GetPopularMoviesContract
 import com.robdir.themoviedb.mock
+import com.robdir.themoviedb.presentation.base.BaseViewModel
 import com.robdir.themoviedb.presentation.common.BaseViewModelTest
-import com.robdir.themoviedb.presentation.common.TheMovieDbError
 import com.robdir.themoviedb.presentation.movielists.common.MovieModel
 import com.robdir.themoviedb.presentation.movielists.common.MovieModelMapper
 import io.reactivex.Single
 import org.junit.Assert.assertEquals
-import org.junit.Before
 import org.junit.Test
-import org.mockito.BDDMockito.inOrder
 import org.mockito.BDDMockito.given
-import org.mockito.BDDMockito.doReturn
+import org.mockito.BDDMockito.inOrder
 import org.mockito.Mockito.spy
 import java.io.IOException
 
@@ -24,7 +21,6 @@ class PopularMoviesViewModelTest : BaseViewModelTest() {
 
     private val mockGetPopularMoviesContract = mock<GetPopularMoviesContract>()
     private val mockMovieModelMapper = mock<MovieModelMapper>()
-    private val mockNetworkInfoProvider = mock<NetworkInfoProvider>()
 
     private val popularMovieViewModel = spy(
         PopularMoviesViewModel(
@@ -35,29 +31,25 @@ class PopularMoviesViewModelTest : BaseViewModelTest() {
         )
     )
 
-    private val mockIsLoadingObserver = mock<Observer<Boolean>>()
     private val mockMoviesObserver = mock<Observer<List<MovieModel>>>()
 
     private val inOrder = inOrder(
         mockIsLoadingObserver,
         mockMoviesObserver,
         mockErrorObserver,
-        mockNetworkErrorObserver
+        mockNetworkErrorObserver,
+        popularMovieViewModel
     )
 
-    private val error = TheMovieDbError()
-
-    @Before
-    fun setup() {
+    override fun setup() {
+        super.setup()
         with(popularMovieViewModel) {
             isLoading.observeForever(mockIsLoadingObserver)
-            error.observeForever(mockErrorObserver)
-            networkError.observeForever(mockNetworkErrorObserver)
             movies.observeForever(mockMoviesObserver)
         }
-
-        doReturn(error).`when`(popularMovieViewModel).createTheMovieDbError()
     }
+
+    override fun getViewModel(): BaseViewModel = popularMovieViewModel
 
     @Test
     fun `WHEN getPopularMovies is called AND retrieved movie list is not empty THEN verify movies are updated`() {

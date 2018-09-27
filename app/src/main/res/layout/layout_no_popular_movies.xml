@@ -19,7 +19,7 @@
         android:layout_centerInParent="true"
         android:gravity="center"
         android:layout_marginTop="@dimen/margin_regular"
-        android:layout_marginBottom="@dimen/margin_large"
+        android:layout_marginBottom="@dimen/margin_xlarge"
         android:text="@string/no_popular_movies_error_message"
         android:textColor="@color/colorTextPrimary"
         android:textSize="@dimen/text_size_regular" />

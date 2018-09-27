@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/margin_small"
+    android:background="@android:color/background_light"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingEnd="@dimen/margin_regular"
+    android:paddingStart="@dimen/margin_regular"
+    android:weightSum="100">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/textViewMovieDetailRowLabel"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="30"
+        android:textColor="@color/colorAccent" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/textViewMovieDetailRowValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_regular"
+        android:layout_marginStart="@dimen/margin_regular"
+        android:layout_weight="70"
+        android:gravity="start"
+        android:textColor="@color/colorTextPrimary" />
+</LinearLayout>

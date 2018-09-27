@@ -1,26 +1,22 @@
 package com.robdir.themoviedb.presentation.movielists.popularmovies
 
 import android.arch.lifecycle.MutableLiveData
-import android.support.annotation.VisibleForTesting
 import com.robdir.themoviedb.core.NetworkInfoProvider
 import com.robdir.themoviedb.core.SchedulerProvider
 import com.robdir.themoviedb.domain.movielists.popularmovies.GetPopularMoviesContract
 import com.robdir.themoviedb.presentation.base.BaseViewModel
-import com.robdir.themoviedb.presentation.common.TheMovieDbError
 import com.robdir.themoviedb.presentation.movielists.common.MovieModel
 import com.robdir.themoviedb.presentation.movielists.common.MovieModelMapper
-import java.io.IOException
 import javax.inject.Inject
 
 class PopularMoviesViewModel @Inject constructor(
     private val getPopularMoviesContract: GetPopularMoviesContract,
     private val movieModelMapper: MovieModelMapper,
-    private val networkInfoProvider: NetworkInfoProvider,
+    networkInfoProvider: NetworkInfoProvider,
     schedulerProvider: SchedulerProvider
-) : BaseViewModel(schedulerProvider) {
+) : BaseViewModel(schedulerProvider, networkInfoProvider) {
 
     val movies: MutableLiveData<List<MovieModel>> = MutableLiveData()
-    val isLoading: MutableLiveData<Boolean> = MutableLiveData()
 
     fun getPopularMovies() {
         isLoading.value = true
@@ -36,16 +32,8 @@ class PopularMoviesViewModel @Inject constructor(
                 },
                 { error ->
                     isLoading.value = false
-
-                    if (error is IOException && !networkInfoProvider.isNetworkAvailable()) {
-                        this.networkError.value = createTheMovieDbError()
-                    } else {
-                        this.error.value = createTheMovieDbError()
-                    }
+                    manageError(error)
                 }
             )
     }
-
-    @VisibleForTesting
-    fun createTheMovieDbError() = TheMovieDbError()
 }

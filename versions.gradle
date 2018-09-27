@@ -3,7 +3,7 @@ ext.versions = [
     kotlinVersion: '1.2.60',
 
     // Sdk and tools
-    minSdkVersion: 15,
+    minSdkVersion: 16,
     targetSdkVersion: 28,
     compileSdkVersion: 28,
     buildToolsVersion: '28.0.2',

@@ -5,13 +5,17 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.annotation.StringRes
+import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.view.ViewCompat
 import android.support.v7.widget.LinearLayoutManager
+import android.widget.ImageView
 import com.robdir.themoviedb.R
 import com.robdir.themoviedb.presentation.base.BaseActivity
 import com.robdir.themoviedb.presentation.common.TheMovieDbError
 import com.robdir.themoviedb.presentation.common.gone
 import com.robdir.themoviedb.presentation.common.visible
 import com.robdir.themoviedb.presentation.common.visibleIf
+import com.robdir.themoviedb.presentation.moviedetails.MovieDetailActivity
 import com.robdir.themoviedb.presentation.movielists.common.MovieAdapter
 import com.robdir.themoviedb.presentation.movielists.common.MovieModel
 import kotlinx.android.synthetic.main.activity_popular_movies.*
@@ -70,8 +74,15 @@ class PopularMoviesActivity :
     // endregion
 
     // region Override methods
-    override fun onMovieSelected(movie: MovieModel) {
-        // TODO: go to movie detail
+    override fun onMovieSelected(movie: MovieModel, imageViewMoviePoster: ImageView) {
+        startActivity(
+            MovieDetailActivity.intent(this, movie),
+            ActivityOptionsCompat.makeSceneTransitionAnimation(
+                this,
+                imageViewMoviePoster,
+                ViewCompat.getTransitionName(imageViewMoviePoster)
+            ).toBundle()
+        )
     }
     // endregion
 

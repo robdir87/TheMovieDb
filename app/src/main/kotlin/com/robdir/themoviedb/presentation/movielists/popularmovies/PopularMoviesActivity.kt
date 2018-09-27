@@ -12,6 +12,7 @@ import com.robdir.themoviedb.presentation.common.TheMovieDbError
 import com.robdir.themoviedb.presentation.common.gone
 import com.robdir.themoviedb.presentation.common.visible
 import com.robdir.themoviedb.presentation.common.visibleIf
+import com.robdir.themoviedb.presentation.moviedetails.MovieDetailActivity
 import com.robdir.themoviedb.presentation.movielists.common.MovieAdapter
 import com.robdir.themoviedb.presentation.movielists.common.MovieModel
 import kotlinx.android.synthetic.main.activity_popular_movies.*
@@ -71,7 +72,7 @@ class PopularMoviesActivity :
 
     // region Override methods
     override fun onMovieSelected(movie: MovieModel) {
-        // TODO: go to movie detail
+        startActivity(MovieDetailActivity.intent(this, movie))
     }
     // endregion
 

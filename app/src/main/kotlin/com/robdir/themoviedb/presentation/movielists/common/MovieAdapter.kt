@@ -45,7 +45,7 @@ class MovieAdapter @Inject constructor(
                     textViewMovieName.text = title
                     textViewMovieYear.text = releaseYear
                     textViewPopularity.text = "$popularity"
-                    textViewMovieGenres.text = genres.joinToString { context.getString(R.string.genre_separator) }
+                    textViewMovieGenres.text = genres.joinToString(context.getString(R.string.genre_separator))
                 }
             }
         }

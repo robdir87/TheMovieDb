@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="@dimen/padding_regular">
+        android:padding="@dimen/margin_regular">
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/imageViewMovieThumbnail"
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size_small"
                 android:textColor="@color/colorTextSecondary"
-                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginTop="@dimen/margin_xlarge"
                 android:layout_marginBottom="@dimen/margin_small"/>
 
             <android.support.v7.widget.AppCompatTextView

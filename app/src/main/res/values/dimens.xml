@@ -2,17 +2,23 @@
 <resources>
     <dimen name="margin_small">8dp</dimen>
     <dimen name="margin_regular">12dp</dimen>
-    <dimen name="margin_large">18dp</dimen>
-
-    <dimen name="padding_regular">8dp</dimen>
+    <dimen name="margin_large">16dp</dimen>
+    <dimen name="margin_xlarge">18dp</dimen>
 
     <dimen name="text_size_xsmall">10sp</dimen>
     <dimen name="text_size_small">12sp</dimen>
     <dimen name="text_size_regular">14sp</dimen>
+    <dimen name="text_size_large">16sp</dimen>
+    <dimen name="text_size_xlarge">20sp</dimen>
 
     <dimen name="movie_thumbnail_width">108dp</dimen>
     <dimen name="movie_thumbnail_height">160dp</dimen>
     <dimen name="movie_card_margin">4dp</dimen>
 
     <dimen name="app_bar_layout_elevation">2dp</dimen>
+
+    <dimen name="movie_detail_expanded_toolbar_height">300dp</dimen>
+    <dimen name="movie_detail_container_margin_top">32dp</dimen>
+    <dimen name="movie_detail_scrim_height">80dp</dimen>
+
 </resources>

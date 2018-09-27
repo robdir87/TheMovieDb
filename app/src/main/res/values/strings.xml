@@ -9,6 +9,16 @@
 
     <string name="popular_movies_toolbar_title">Popular Movies</string>
 
-    <string name="genre_separator">,%s&#032;</string>
-    <string name="languages_separator">,%s&#032;</string>
+    <string name="genre_separator">,\u0020</string>
+    <string name="languages_separator">,\u0020</string>
+
+    <!-- Movie Detail -->
+    <string name="movie_detail_popularity">Popularity:</string>
+    <string name="movie_detail_release_year">Release Year:</string>
+    <string name="movie_detail_genres">Genres:</string>
+    <string name="movie_detail_runtime">Runtime:</string>
+    <string name="movie_detail_revenue">Revenue:</string>
+    <string name="movie_detail_languages">Languages:</string>
+
+    <string name="movie_detail_runtime_value">%d mins</string>
 </resources>

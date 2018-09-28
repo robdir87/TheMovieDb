@@ -5,6 +5,7 @@ import android.arch.persistence.room.Ignore
 import android.arch.persistence.room.PrimaryKey
 
 const val POPULAR_MOVIES_TABLE_NAME = "popular_movies"
+const val COLUMN_NAME_POPULARITY = "popularity"
 
 @Entity(tableName = POPULAR_MOVIES_TABLE_NAME)
 data class MovieEntity(

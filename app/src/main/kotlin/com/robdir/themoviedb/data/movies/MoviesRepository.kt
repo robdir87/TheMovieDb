@@ -1,7 +1,9 @@
 package com.robdir.themoviedb.data.movies
 
+import android.support.annotation.VisibleForTesting
 import com.robdir.themoviedb.data.MovieApi
 import com.robdir.themoviedb.data.persistence.PopularMoviesDao
+import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -10,19 +12,27 @@ class MoviesRepository @Inject constructor(
     private val popularMoviesDao: PopularMoviesDao
 ) : MoviesRepositoryContract {
 
-    override fun getPopularMovies(pageNumber: Int): Single<List<MovieEntity>> =
-        movieApi.getPopularMovies().map { it.results }
+    override fun getPopularMovies(forceUpdate: Boolean): Single<List<MovieEntity>> =
+        if (forceUpdate) {
+            deletePopularMoviesFromDatabase().andThen(getPopularMoviesFromApi())
+        } else {
+            popularMoviesDao.getPopularMovies()
+                .flatMap { movies ->
+                    if (movies.isEmpty()) getPopularMoviesFromApi() else Single.just(movies)
+                }.onErrorResumeNext { getPopularMoviesFromApi() }
+        }
 
     override fun getMovieDetails(movieId: Int): Single<MovieDetailEntity> =
         movieApi.getMovieDetails(movieId = movieId)
 
     // region Private methods
-    private fun getPopularMoviesFromDatabase(): Single<List<MovieEntity>> =
-        popularMoviesDao.getPopularMovies()
+    @VisibleForTesting
+    fun getPopularMoviesFromApi(): Single<List<MovieEntity>> =
+        movieApi.getPopularMovies().map { it.results }.doOnSuccess(popularMoviesDao::savePopularMovies)
 
-    private fun savePopularMoviesToDatabase(popularMovies: List<MovieEntity>, clearBefore: Boolean = false) {
-        if (clearBefore) popularMoviesDao.deleteMovies()
-        popularMoviesDao.savePopularMovies(popularMovies)
+    private fun deletePopularMoviesFromDatabase(): Completable = Completable.create { emitter ->
+        popularMoviesDao.deleteMovies()
+        emitter.onComplete()
     }
     // endregion
 }

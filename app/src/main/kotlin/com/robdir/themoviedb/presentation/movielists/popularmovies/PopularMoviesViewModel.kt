@@ -18,10 +18,10 @@ class PopularMoviesViewModel @Inject constructor(
 
     val movies: MutableLiveData<List<MovieModel>> = MutableLiveData()
 
-    fun getPopularMovies() {
+    fun getPopularMovies(fromSwipeToRefresh: Boolean) {
         isLoading.value = true
 
-        getPopularMoviesContract.getPopularMovies()
+        getPopularMoviesContract.getPopularMovies(forceUpdate = fromSwipeToRefresh)
             .map { movieModelMapper.toPresentationModel(it) }
             .subscribeOn(schedulerProvider.io())
             .observeOn(schedulerProvider.mainThread())

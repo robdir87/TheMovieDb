@@ -22,6 +22,8 @@ class PopularMoviesViewModelTest : BaseViewModelTest() {
     private val mockGetPopularMoviesContract = mock<GetPopularMoviesContract>()
     private val mockMovieModelMapper = mock<MovieModelMapper>()
 
+    private val forceUpdate = false
+
     private val popularMovieViewModel = spy(
         PopularMoviesViewModel(
             mockGetPopularMoviesContract,
@@ -57,13 +59,13 @@ class PopularMoviesViewModelTest : BaseViewModelTest() {
         val mockMovieList = listOf(createMockMovie())
         val mockMovieModelList = listOf(createMockMovieModel())
 
-        given(mockGetPopularMoviesContract.getPopularMovies())
+        given(mockGetPopularMoviesContract.getPopularMovies(forceUpdate))
             .willReturn(Single.just(mockMovieList))
         given(mockMovieModelMapper.toPresentationModel(mockMovieList))
             .willReturn(mockMovieModelList)
 
         // Act
-        popularMovieViewModel.getPopularMovies()
+        popularMovieViewModel.getPopularMovies(forceUpdate)
 
         // Assert
         inOrder.run {
@@ -78,7 +80,7 @@ class PopularMoviesViewModelTest : BaseViewModelTest() {
     @Test
     fun `WHEN getPopularMovies is called AND retrieved movie list is empty THEN verify error is updated`() {
         // Arrange
-        given(mockGetPopularMoviesContract.getPopularMovies())
+        given(mockGetPopularMoviesContract.getPopularMovies(forceUpdate))
             .willReturn(Single.just(emptyList()))
         given(mockMovieModelMapper.toPresentationModel(emptyList()))
             .willReturn(emptyList())
@@ -90,13 +92,13 @@ class PopularMoviesViewModelTest : BaseViewModelTest() {
     @Test
     fun `WHEN getPopularMovies is called AND an IOException is thrown AND there is no network available THEN verify networkError is updated`() {
         // Arrange
-        given(mockGetPopularMoviesContract.getPopularMovies())
+        given(mockGetPopularMoviesContract.getPopularMovies(forceUpdate))
             .willReturn(Single.error(IOException()))
         given(mockNetworkInfoProvider.isNetworkAvailable())
             .willReturn(false)
 
         // Act
-        popularMovieViewModel.getPopularMovies()
+        popularMovieViewModel.getPopularMovies(forceUpdate)
 
         // Assert
         inOrder.run {
@@ -110,7 +112,7 @@ class PopularMoviesViewModelTest : BaseViewModelTest() {
     @Test
     fun `WHEN getPopularMovies is called AND an IOException is thrown AND there is a network available THEN verify error is updated`() {
         // Arrange
-        given(mockGetPopularMoviesContract.getPopularMovies())
+        given(mockGetPopularMoviesContract.getPopularMovies(forceUpdate))
             .willReturn(Single.error(IOException()))
         given(mockNetworkInfoProvider.isNetworkAvailable())
             .willReturn(true)
@@ -122,7 +124,7 @@ class PopularMoviesViewModelTest : BaseViewModelTest() {
     @Test
     fun `WHEN getPopularMovies is called AND an Exception that is not IO is thrown THEN verify error is updated`() {
         // Arrange
-        given(mockGetPopularMoviesContract.getPopularMovies())
+        given(mockGetPopularMoviesContract.getPopularMovies(forceUpdate))
             .willReturn(Single.error(Exception()))
 
         // Act & Assert
@@ -131,7 +133,7 @@ class PopularMoviesViewModelTest : BaseViewModelTest() {
 
     private fun callGetPopularMoviesAndAssertErrorUpdated() {
         // Act
-        popularMovieViewModel.getPopularMovies()
+        popularMovieViewModel.getPopularMovies(forceUpdate)
 
         // Assert
         inOrder.run {

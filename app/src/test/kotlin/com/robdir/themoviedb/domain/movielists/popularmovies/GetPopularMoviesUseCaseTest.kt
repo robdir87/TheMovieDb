@@ -23,19 +23,19 @@ class GetPopularMoviesUseCaseTest {
     private val getPopularMovieUseCase =
         GetPopularMoviesUseCase(mockMoviesRepositoryContract, mockGenreRepositoryContract, mockMovieMapper, mockGenreNameMapper)
 
-    private val pageNumber = 1
     private val genreEntities = listOf(createMockGenreEntity())
+    private val forceUpdate = false
 
     @Test
     fun `WHEN getPopularMovies is called AND a repository fails THEN verify an exception is returned`() {
         // Arrange
-        given(mockMoviesRepositoryContract.getPopularMovies(pageNumber))
+        given(mockMoviesRepositoryContract.getPopularMovies(forceUpdate))
             .willReturn(Single.error(Exception()))
-        given(mockGenreRepositoryContract.getGenres())
+        given(mockGenreRepositoryContract.getGenres(forceUpdate))
             .willReturn(Single.just(genreEntities))
 
         // Act && Assert
-        getPopularMovieUseCase.getPopularMovies(pageNumber)
+        getPopularMovieUseCase.getPopularMovies(forceUpdate)
             .test()
             .assertError(Exception::class.java)
     }
@@ -47,9 +47,9 @@ class GetPopularMoviesUseCaseTest {
         val movies = listOf(createMockMovie())
         val genreNameMap = mapOf(mockGenreId to mockGenreName)
 
-        given(mockMoviesRepositoryContract.getPopularMovies(pageNumber))
+        given(mockMoviesRepositoryContract.getPopularMovies(forceUpdate))
             .willReturn(Single.just(movieEntities))
-        given(mockGenreRepositoryContract.getGenres())
+        given(mockGenreRepositoryContract.getGenres(forceUpdate))
             .willReturn(Single.just(genreEntities))
         given(mockMovieMapper.toDomainModel(movieEntities, genreNameMap))
             .willReturn(movies)
@@ -57,7 +57,7 @@ class GetPopularMoviesUseCaseTest {
             .willReturn(genreNameMap)
 
         // Act & Assert
-        getPopularMovieUseCase.getPopularMovies(pageNumber)
+        getPopularMovieUseCase.getPopularMovies(forceUpdate)
             .test()
             .assertResult(movies)
     }

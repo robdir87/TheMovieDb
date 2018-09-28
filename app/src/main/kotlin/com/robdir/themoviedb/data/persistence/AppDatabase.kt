@@ -15,6 +15,8 @@ const val DATABASE_NAME = "com.robdir.themoviedb"
 // region SQL Commands
 const val SELECT_ALL_FROM = "select * from"
 const val DELETE_FROM = "delete from"
+const val ORDER_BY = "order by"
+const val DESC = "desc"
 // endregion
 
 @Database(

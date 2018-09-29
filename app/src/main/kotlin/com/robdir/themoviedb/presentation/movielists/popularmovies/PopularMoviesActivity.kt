@@ -90,7 +90,7 @@ class PopularMoviesActivity :
     private fun setupRecyclerViewMovies() {
         swipeRefreshLayoutMovies.apply {
             setOnRefreshListener {
-                loadPopularMovies()
+                loadPopularMovies(fromSwipeToRefresh = true)
             }
             setColorSchemeResources(R.color.colorAccent)
         }
@@ -112,8 +112,8 @@ class PopularMoviesActivity :
         movieAdapter.movies = movies
     }
 
-    private fun loadPopularMovies() {
-        popularMoviesViewModel.getPopularMovies()
+    private fun loadPopularMovies(fromSwipeToRefresh: Boolean = false) {
+        popularMoviesViewModel.getPopularMovies(fromSwipeToRefresh)
     }
 
     private fun showProgress() {

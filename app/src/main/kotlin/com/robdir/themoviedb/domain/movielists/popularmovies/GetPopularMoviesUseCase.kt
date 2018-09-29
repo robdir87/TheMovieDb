@@ -16,9 +16,9 @@ class GetPopularMoviesUseCase @Inject constructor(
     private val genreNameMapper: GenreNameMapper
 ) : GetPopularMoviesContract {
 
-    override fun getPopularMovies(page: Int): Single<List<Movie>> =
-        moviesRepositoryContract.getPopularMovies(page)
-            .zipWith(genresRepositoryContract.getGenres(), BiFunction { popularMovies, genres ->
+    override fun getPopularMovies(forceUpdate: Boolean): Single<List<Movie>> =
+        moviesRepositoryContract.getPopularMovies(forceUpdate)
+            .zipWith(genresRepositoryContract.getGenres(forceUpdate), BiFunction { popularMovies, genres ->
                 movieMapper.toDomainModel(popularMovies, genreNameMapper.toNameMap(genres))
             })
 }

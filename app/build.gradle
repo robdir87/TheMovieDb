@@ -27,9 +27,11 @@ android {
     buildTypes {
         debug {
             applicationIdSuffix ".debug"
+            buildConfigField "int", "DATABASE_VERSION", "1"
         }
 
         release {
+            buildConfigField "int", "DATABASE_VERSION", "1"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -78,6 +80,8 @@ dependencies {
     implementation libraries.rxAndroid
 
     // Architecture Components
+    implementation libraries.room
+    kapt libraries.roomCompiler
     implementation libraries.lifecycle
     kapt libraries.lifecycleCompiler
 

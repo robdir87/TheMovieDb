@@ -11,6 +11,7 @@ import android.support.annotation.StringRes
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.robdir.themoviedb.R
 import com.robdir.themoviedb.core.LocaleProvider
 import com.robdir.themoviedb.core.isLollipopOrLater
@@ -168,7 +169,7 @@ class MovieDetailActivity : BaseActivity() {
         try {
             startActivity(Intent(Intent.ACTION_VIEW).setData(Uri.parse(url)))
         } catch (exception: Exception) {
-            // If the user has no browser, just fail silently
+            Toast.makeText(this, R.string.no_browser_error, Toast.LENGTH_LONG).show()
         }
     }
     // endregion

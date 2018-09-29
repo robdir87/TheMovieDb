@@ -142,14 +142,14 @@ class PopularMoviesActivity :
         layoutPopularMoviesProgress.gone()
     }
 
-    private fun manageError(@StringRes stringResId: Int) {
+    private fun manageError(@StringRes messageId: Int) {
         movieAdapter.movies = emptyList()
 
         swipeRefreshLayoutMovies.gone()
         swipeRefreshLayoutMovies.isRefreshing = false
 
         layoutNoPopularMovies.visible()
-        textViewNoPopularMoviesMessage.setText(stringResId)
+        textViewNoPopularMoviesMessage.setText(messageId)
     }
     // endregion
 }

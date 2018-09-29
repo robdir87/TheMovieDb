@@ -127,11 +127,11 @@ class SearchMoviesActivity :
         movieAdapter.movies = movies
     }
 
-    private fun manageError(@StringRes stringResId: Int) {
+    private fun manageError(@StringRes messageId: Int) {
         movieAdapter.movies = emptyList()
 
         layoutNoMovies.visible()
-        textViewNoPopularMoviesMessage.setText(stringResId)
+        textViewNoPopularMoviesMessage.setText(messageId)
     }
     // endregion
 }

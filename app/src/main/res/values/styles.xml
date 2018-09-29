@@ -14,4 +14,8 @@
     </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="CollapsingToolbar.Expanded.SmallerText" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
+        <item name="android:textSize">@dimen/movie_detail_expanded_toolbar_text_size</item>
+    </style>
 </resources>

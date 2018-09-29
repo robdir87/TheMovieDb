@@ -17,6 +17,7 @@
 
     <dimen name="app_bar_layout_elevation">2dp</dimen>
 
+    <dimen name="movie_detail_expanded_toolbar_text_size">24dp</dimen>
     <dimen name="movie_detail_expanded_toolbar_height">300dp</dimen>
     <dimen name="movie_detail_container_margin_top">32dp</dimen>
     <dimen name="movie_detail_scrim_height">80dp</dimen>

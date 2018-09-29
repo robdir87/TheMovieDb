@@ -7,7 +7,7 @@ import javax.inject.Inject
 class MovieMapper @Inject constructor(private val genreNameMapper: GenreNameMapper) {
     fun toDomainModel(movieEntity: MovieEntity, genreMap: Map<Int, String>): Movie = with(movieEntity) {
         Movie(
-            id, title, popularity, posterPath, releaseDate, genreNameMapper.toNameList(genreIds, genreMap)
+            id, title, popularity, posterPath.orEmpty(), releaseDate, genreNameMapper.toNameList(genreIds, genreMap)
         )
     }
 

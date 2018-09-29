@@ -7,4 +7,6 @@ interface MoviesRepositoryContract {
     fun getPopularMovies(forceUpdate: Boolean): Single<List<MovieEntity>>
 
     fun getMovieDetails(movieId: Int): Single<MovieDetailEntity>
+
+    fun searchMovies(query: String): Single<List<MovieEntity>>
 }

@@ -20,7 +20,7 @@ class GetPopularMoviesUseCaseTest {
     private val mockMovieMapper = mock<MovieMapper>()
     private val mockGenreNameMapper = mock<GenreNameMapper>()
 
-    private val getPopularMovieUseCase =
+    private val getPopularMoviesUseCase =
         GetPopularMoviesUseCase(mockMoviesRepositoryContract, mockGenreRepositoryContract, mockMovieMapper, mockGenreNameMapper)
 
     private val genreEntities = listOf(createMockGenreEntity())
@@ -34,8 +34,8 @@ class GetPopularMoviesUseCaseTest {
         given(mockGenreRepositoryContract.getGenres(forceUpdate))
             .willReturn(Single.just(genreEntities))
 
-        // Act && Assert
-        getPopularMovieUseCase.getPopularMovies(forceUpdate)
+        // Act & Assert
+        getPopularMoviesUseCase.getPopularMovies(forceUpdate)
             .test()
             .assertError(Exception::class.java)
     }
@@ -57,7 +57,7 @@ class GetPopularMoviesUseCaseTest {
             .willReturn(genreNameMap)
 
         // Act & Assert
-        getPopularMovieUseCase.getPopularMovies(forceUpdate)
+        getPopularMoviesUseCase.getPopularMovies(forceUpdate)
             .test()
             .assertResult(movies)
     }

@@ -37,4 +37,13 @@ class MovieMapperTest {
         // Arrange, Act & Assert
         assertEquals(movie, movieMapper.toDomainModel(movieEntity, mockMovieGenreMap))
     }
+
+    @Test
+    fun `WHEN toDomainModel is called AND a MovieEntity is received AND posterPath is null THEN verify a Movie is returned and posterPath is an empty string`() {
+        // Arrange, Act & Assert
+        assertEquals(
+            createMockMovie(posterPath = ""),
+            movieMapper.toDomainModel(createMockMovieEntity(posterPath = null), mockMovieGenreMap)
+        )
+    }
 }

@@ -8,6 +8,8 @@ import android.support.annotation.StringRes
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.view.ViewCompat
 import android.support.v7.widget.LinearLayoutManager
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ImageView
 import com.robdir.themoviedb.R
 import com.robdir.themoviedb.presentation.base.BaseActivity
@@ -18,6 +20,7 @@ import com.robdir.themoviedb.presentation.common.visibleIf
 import com.robdir.themoviedb.presentation.moviedetails.MovieDetailActivity
 import com.robdir.themoviedb.presentation.movielists.common.MovieAdapter
 import com.robdir.themoviedb.presentation.movielists.common.MovieModel
+import com.robdir.themoviedb.presentation.movielists.searchmovies.SearchMoviesActivity
 import kotlinx.android.synthetic.main.activity_popular_movies.*
 import kotlinx.android.synthetic.main.layout_no_popular_movies.*
 import javax.inject.Inject
@@ -45,6 +48,7 @@ class PopularMoviesActivity :
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_popular_movies)
 
+        setSupportActionBar(toolbarPopularMovies)
         setupRecyclerViewMovies()
 
         popularMoviesViewModel =
@@ -84,6 +88,20 @@ class PopularMoviesActivity :
             ).toBundle()
         )
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_item_search, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean =
+        when (item?.itemId) {
+            R.id.menuItemSearchMovies -> {
+                startActivity(SearchMoviesActivity.intent(this@PopularMoviesActivity))
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     // endregion
 
     // region Private methods

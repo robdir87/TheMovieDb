@@ -22,6 +22,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 import kotlinx.android.synthetic.main.layout_movie_description.view.*
 import kotlinx.android.synthetic.main.layout_movie_detail_row.view.*
+import kotlinx.android.synthetic.main.layout_movie_popularity.view.*
 import javax.inject.Inject
 
 class MovieDetailActivity : BaseActivity() {
@@ -99,12 +100,12 @@ class MovieDetailActivity : BaseActivity() {
             toolbarLayoutMovieDetail.title = title
 
             layoutMovieDetailContainer.run {
+                addPopularityRow("$popularity")
                 addDetailRow(R.string.movie_detail_release_year, releaseYear)
                 addDetailRow(
                     R.string.movie_detail_genres,
                     genres.joinToString(context.getString(R.string.genre_separator))
                 )
-                addDetailRow(R.string.movie_detail_popularity, "$popularity")
             }
 
             movieDetailViewModel.getMovieDetail(id)
@@ -121,10 +122,12 @@ class MovieDetailActivity : BaseActivity() {
             layoutMovieDetailContainer.run {
                 layoutMovieDetailContainer.addDescriptionRow(overview)
                 runtime?.let { addDetailRow(R.string.movie_detail_runtime, getString(R.string.movie_detail_runtime_value, it)) }
-                addDetailRow(
-                    R.string.movie_detail_revenue,
-                    getString(R.string.movie_detail_revenue_format, localeProvider.getNumberFormat().format(revenue))
-                )
+                if (revenue > 0) {
+                    addDetailRow(
+                        R.string.movie_detail_revenue,
+                        getString(R.string.movie_detail_revenue_format, localeProvider.getNumberFormat().format(revenue))
+                    )
+                }
                 addDetailRow(R.string.movie_detail_language, originalLanguage)
             }
         }
@@ -152,6 +155,13 @@ class MovieDetailActivity : BaseActivity() {
 
             textViewMovieDescription.text = it
         }
+    }
+
+    private fun ViewGroup.addPopularityRow(popularity: String) {
+        addView(LayoutInflater.from(context)
+            .inflate(R.layout.layout_movie_popularity, this, false), 0)
+
+        textViewMoviePopularity.text = popularity
     }
 
     private fun goToHomePage(url: String) {

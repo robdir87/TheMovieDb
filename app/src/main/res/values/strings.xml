@@ -4,10 +4,13 @@
     <string name="network_error_message">Please check your internet connection.</string>
     <string name="generic_error_message">We\'re sorry, something went wrong. Please try again.</string>
     <string name="no_popular_movies_error_message">Popular movies not available.</string>
+    <string name="movies_not_available_error_message">Movies not available.</string>
 
     <string name="action_try_again">TRY AGAIN</string>
 
     <string name="popular_movies_toolbar_title">Popular Movies</string>
+    <string name="search_movies_toolbar_title">Search Movies</string>
+    <string name="search_movies_hint">Movie Title</string>
 
     <string name="genre_separator">,\u0020</string>
 

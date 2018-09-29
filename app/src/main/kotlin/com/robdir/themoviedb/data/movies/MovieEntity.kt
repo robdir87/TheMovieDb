@@ -12,7 +12,7 @@ data class MovieEntity(
     @PrimaryKey val id: Int,
     val title: String,
     val popularity: Double,
-    val posterPath: String,
+    val posterPath: String?,
     val releaseDate: String,
     val genreIds: List<Int>
 ) {

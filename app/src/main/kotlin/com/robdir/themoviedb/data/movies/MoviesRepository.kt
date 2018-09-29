@@ -25,6 +25,9 @@ class MoviesRepository @Inject constructor(
     override fun getMovieDetails(movieId: Int): Single<MovieDetailEntity> =
         movieApi.getMovieDetails(movieId = movieId)
 
+    override fun searchMovies(query: String): Single<List<MovieEntity>> =
+        movieApi.searchMovies(query = query).map { it.results }
+
     // region Private methods
     @VisibleForTesting
     fun getPopularMoviesFromApi(): Single<List<MovieEntity>> =

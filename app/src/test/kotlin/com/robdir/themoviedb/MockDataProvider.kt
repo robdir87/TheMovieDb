@@ -43,20 +43,28 @@ object MockDataProvider {
     val mockMovieGenreMap = mapOf(mockGenreId to mockGenreName, mockAnotherGenreId to mockAnotherGenreName)
 
     // region Provider methods
-    fun createMockMovieEntity() = MovieEntity(
-        mockMovieId,
+    fun createMockMovieEntity(
+        id: Int = mockMovieId,
+        popularity: Double = mockMoviePopularity,
+        posterPath: String? = mockMoviePosterPath
+    ) = MovieEntity(
+        id,
         mockMovieTitle,
-        mockMoviePopularity,
-        mockMoviePosterPath,
+        popularity,
+        posterPath,
         mockMovieReleaseDate,
         mockMovieGenreIds
     )
 
-    fun createMockMovie() = Movie(
-        mockMovieId,
+    fun createMockMovie(
+        id: Int = mockMovieId,
+        popularity: Double = mockMoviePopularity,
+        posterPath: String = mockMoviePosterPath
+    ) = Movie(
+        id,
         mockMovieTitle,
-        mockMoviePopularity,
-        mockMoviePosterPath,
+        popularity,
+        posterPath,
         mockMovieReleaseDate,
         mockMovieGenreNames
     )

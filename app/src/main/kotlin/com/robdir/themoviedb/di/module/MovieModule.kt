@@ -8,20 +8,25 @@ import com.robdir.themoviedb.domain.moviedetails.GetMovieDetailsContract
 import com.robdir.themoviedb.domain.moviedetails.GetMovieDetailsUseCase
 import com.robdir.themoviedb.domain.movielists.popularmovies.GetPopularMoviesContract
 import com.robdir.themoviedb.domain.movielists.popularmovies.GetPopularMoviesUseCase
+import com.robdir.themoviedb.domain.movielists.searchmovies.SearchMoviesContract
+import com.robdir.themoviedb.domain.movielists.searchmovies.SearchMoviesUseCase
 import dagger.Binds
 import dagger.Module
 
 @Module
 abstract class MovieModule {
     @Binds
-    abstract fun provideMoviesRepositoryContract(moviesRepository: MoviesRepository): MoviesRepositoryContract
+    abstract fun bindMoviesRepositoryContract(moviesRepository: MoviesRepository): MoviesRepositoryContract
 
     @Binds
-    abstract fun provideGenresRepositoryContract(genresRepository: GenresRepository): GenresRepositoryContract
+    abstract fun bindGenresRepositoryContract(genresRepository: GenresRepository): GenresRepositoryContract
 
     @Binds
-    abstract fun provideGetPopularMoviesContract(getPopularMoviesUseCase: GetPopularMoviesUseCase): GetPopularMoviesContract
+    abstract fun bindGetPopularMoviesContract(getPopularMoviesUseCase: GetPopularMoviesUseCase): GetPopularMoviesContract
 
     @Binds
-    abstract fun provideGetMovieDetailsContract(getMovieDetailsUseCase: GetMovieDetailsUseCase): GetMovieDetailsContract
+    abstract fun bindGetMovieDetailsContract(getMovieDetailsUseCase: GetMovieDetailsUseCase): GetMovieDetailsContract
+
+    @Binds
+    abstract fun bindSearchMoviesContract(searchMoviesUseCase: SearchMoviesUseCase): SearchMoviesContract
 }

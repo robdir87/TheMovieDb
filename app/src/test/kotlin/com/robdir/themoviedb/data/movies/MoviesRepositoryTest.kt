@@ -13,10 +13,10 @@ import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.BDDMockito.given
 import org.mockito.BDDMockito.inOrder
-import org.mockito.Mockito.doReturn
-import org.mockito.Mockito.never
 import org.mockito.Mockito.spy
+import org.mockito.Mockito.doReturn
 import org.mockito.Mockito.verify
+import org.mockito.Mockito.never
 
 class MoviesRepositoryTest {
 
@@ -28,23 +28,23 @@ class MoviesRepositoryTest {
     private val inOrder = inOrder(mockPopularMoviesDao, mockMovieApi, moviesRepository)
 
     private val page = 1
-    private val popularMovieList: List<MovieEntity> = listOf(createMockMovieEntity())
+    private val movieList: List<MovieEntity> = listOf(createMockMovieEntity())
     private val searchResult = SearchResultEntity(
-        page = page, totalResults = 0, results = popularMovieList, totalPages = 1
+        page = page, totalResults = 1, results = movieList, totalPages = 1
     )
 
     // region getPopularMovies
     @Test
     fun `WHEN getPopularMovies is called AND forceUpdate is true THEN verify popular movies are fetched via the api`() {
         // Arrange
-        doReturn(Single.just(popularMovieList))
+        doReturn(Single.just(movieList))
             .`when`(moviesRepository).getPopularMoviesFromApi()
 
         // Act
         moviesRepository.getPopularMovies(forceUpdate = true).subscribe(popularMoviesTestObserver)
 
         // Assert
-        popularMoviesTestObserver.assertResult(popularMovieList)
+        popularMoviesTestObserver.assertResult(movieList)
         verify(mockPopularMoviesDao).deleteMovies()
         verify(moviesRepository).getPopularMoviesFromApi()
         verify(mockPopularMoviesDao, never()).getPopularMovies()
@@ -55,14 +55,14 @@ class MoviesRepositoryTest {
         // Arrange
         given(mockPopularMoviesDao.getPopularMovies())
             .willReturn(Single.error(Exception()))
-        doReturn(Single.just(popularMovieList))
+        doReturn(Single.just(movieList))
             .`when`(moviesRepository).getPopularMoviesFromApi()
 
         // Act
         moviesRepository.getPopularMovies(forceUpdate = false).subscribe(popularMoviesTestObserver)
 
         // Assert
-        popularMoviesTestObserver.assertResult(popularMovieList)
+        popularMoviesTestObserver.assertResult(movieList)
         inOrder.run {
             verify(mockPopularMoviesDao, never()).deleteMovies()
             verify(mockPopularMoviesDao).getPopularMovies()
@@ -75,14 +75,14 @@ class MoviesRepositoryTest {
         // Arrange
         given(mockPopularMoviesDao.getPopularMovies())
             .willReturn(Single.just(emptyList()))
-        doReturn(Single.just(popularMovieList))
+        doReturn(Single.just(movieList))
             .`when`(moviesRepository).getPopularMoviesFromApi()
 
         // Act
         moviesRepository.getPopularMovies(forceUpdate = false).subscribe(popularMoviesTestObserver)
 
         // Assert
-        popularMoviesTestObserver.assertResult(popularMovieList)
+        popularMoviesTestObserver.assertResult(movieList)
         inOrder.run {
             verify(mockPopularMoviesDao, never()).deleteMovies()
             verify(mockPopularMoviesDao).getPopularMovies()
@@ -94,13 +94,13 @@ class MoviesRepositoryTest {
     fun `WHEN getPopularMovies is called AND forceUpdate is false AND database contains popular movies THEN verify popular movies are fetched via the api`() {
         // Arrange
         given(mockPopularMoviesDao.getPopularMovies())
-            .willReturn(Single.just(popularMovieList))
+            .willReturn(Single.just(movieList))
 
         // Act
         moviesRepository.getPopularMovies(forceUpdate = false).subscribe(popularMoviesTestObserver)
 
         // Assert
-        popularMoviesTestObserver.assertResult(popularMovieList)
+        popularMoviesTestObserver.assertResult(movieList)
         inOrder.run {
             verify(mockPopularMoviesDao, never()).deleteMovies()
             verify(mockPopularMoviesDao).getPopularMovies()
@@ -120,10 +120,10 @@ class MoviesRepositoryTest {
         moviesRepository.getPopularMoviesFromApi().subscribe(popularMoviesTestObserver)
 
         // Assert
-        popularMoviesTestObserver.assertValue(popularMovieList)
+        popularMoviesTestObserver.assertValue(movieList)
         inOrder.run {
             verify(mockMovieApi).getPopularMovies()
-            verify(mockPopularMoviesDao).savePopularMovies(popularMovieList)
+            verify(mockPopularMoviesDao).savePopularMovies(movieList)
         }
     }
     // endregion
@@ -141,6 +141,25 @@ class MoviesRepositoryTest {
         moviesRepository.getMovieDetails(mockMovieId)
             .test()
             .assertResult(movieDetail)
+    }
+    // endregion
+
+    // region searchMovies
+    @Test
+    fun `WHEN searchMovies is called THEN verify movies are fetched via the api`() {
+        // Arrange
+        val query = "some-query"
+        val searchResult = SearchResultEntity(
+            page = page, totalResults = 1, totalPages = 1, results = movieList
+        )
+
+        given(mockMovieApi.searchMovies(query = query))
+            .willReturn(Single.just(searchResult))
+
+        // Act & Assert
+        moviesRepository.searchMovies(query)
+            .test()
+            .assertResult(movieList)
     }
     // endregion
 }

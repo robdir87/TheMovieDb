@@ -7,7 +7,7 @@ The Presentation layer implemented using Model-View-ViewModel (**MVVM**) and **L
 
 **Dagger 2** with Android support is used for dependency injection.
 
-The data and domain classes and ViewModel are tested using JUnit and dependencies are mocked using **Mockito**.
+The data and domain classes and ViewModels are tested using JUnit and dependencies are mocked using **Mockito**.
 
 Other tools/concepts:
 - [ktlin](https://github.com/shyiko/ktlint) and [detekt](https://github.com/arturbosch/detekt) for static code analysis

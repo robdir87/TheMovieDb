@@ -1,8 +1,6 @@
 package com.robdir.themoviedb.presentation.moviedetails
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -17,7 +15,6 @@ import com.robdir.themoviedb.R
 import com.robdir.themoviedb.core.LocaleProvider
 import com.robdir.themoviedb.core.isLollipopOrLater
 import com.robdir.themoviedb.presentation.base.BaseActivity
-import com.robdir.themoviedb.presentation.common.TheMovieDbError
 import com.robdir.themoviedb.presentation.common.visibleIf
 import com.robdir.themoviedb.presentation.movielists.common.MovieModel
 import com.squareup.picasso.Callback
@@ -41,9 +38,6 @@ class MovieDetailActivity : BaseActivity() {
 
     // region Injected properties
     @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    @Inject
     lateinit var picasso: Picasso
 
     @Inject
@@ -59,20 +53,14 @@ class MovieDetailActivity : BaseActivity() {
         supportPostponeEnterTransition()
 
         movieDetailViewModel =
-            ViewModelProviders.of(this, viewModelFactory)[MovieDetailViewModel::class.java]
-                .apply {
-                    movieDetail.observe(this@MovieDetailActivity,
-                        Observer<MovieDetailModel> { movieDetail -> displayMovieDetail(movieDetail) }
-                    )
-
-                    error.observe(this@MovieDetailActivity,
-                        Observer<TheMovieDbError> { manageError(R.string.movies_not_available_error_message) }
-                    )
-
-                    networkError.observe(this@MovieDetailActivity,
-                        Observer<TheMovieDbError> { manageError(R.string.network_error_message) }
-                    )
-                }
+            viewModel<MovieDetailViewModel>(
+                onErrorChanged = { manageError(R.string.movies_not_available_error_message) },
+                onNetworkErrorChanged = { manageError(R.string.network_error_message) }
+            ).apply {
+                movieDetail.observe(this@MovieDetailActivity,
+                    Observer { movieDetail -> displayMovieDetail(movieDetail) }
+                )
+            }
 
         setupToolbar()
         displayMovieBasicDataAndLoadDetail()

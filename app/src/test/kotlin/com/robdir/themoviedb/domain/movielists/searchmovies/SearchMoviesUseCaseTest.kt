@@ -28,7 +28,7 @@ class SearchMoviesUseCaseTest {
 
     private val genreEntities = listOf(createMockGenreEntity())
     private val queryString = "some-query-string"
-    private val forceUpdate = true
+    private val forceUpdate = false
 
     @Test
     fun `WHEN searchMovies is called AND a repository fails THEN verify an exception is returned`() {
@@ -43,8 +43,8 @@ class SearchMoviesUseCaseTest {
             .test()
             .assertError(Exception::class.java)
 
-        verify(mockGenreRepositoryContract).getGenres(forceUpdate = true)
-        verify(mockGenreRepositoryContract, never()).getGenres(forceUpdate = false)
+        verify(mockGenreRepositoryContract).getGenres(forceUpdate = false)
+        verify(mockGenreRepositoryContract, never()).getGenres(forceUpdate = true)
     }
 
     @Test
@@ -71,7 +71,7 @@ class SearchMoviesUseCaseTest {
         )
         val genreNameMap = mapOf(mockGenreId to mockGenreName)
 
-        given(mockMoviesRepositoryContract.getPopularMovies(forceUpdate))
+        given(mockMoviesRepositoryContract.searchMovies(queryString))
             .willReturn(Single.just(movieEntities))
         given(mockGenreRepositoryContract.getGenres(forceUpdate))
             .willReturn(Single.just(genreEntities))

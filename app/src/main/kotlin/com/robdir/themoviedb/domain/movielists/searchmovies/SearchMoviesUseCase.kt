@@ -19,7 +19,7 @@ class SearchMoviesUseCase @Inject constructor(
     override fun searchMovies(query: String): Single<List<Movie>> =
         moviesRepositoryContract.searchMovies(query)
             .flatMap { movies -> Single.just(movies.sortedByDescending { it.popularity }) }
-            .zipWith(genresRepositoryContract.getGenres(forceUpdate = true), BiFunction { popularMovies, genres ->
+            .zipWith(genresRepositoryContract.getGenres(forceUpdate = false), BiFunction { popularMovies, genres ->
                 movieMapper.toDomainModel(popularMovies, genreNameMapper.toNameMap(genres))
             })
 }

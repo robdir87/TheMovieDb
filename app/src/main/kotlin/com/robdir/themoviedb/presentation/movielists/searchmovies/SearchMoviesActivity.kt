@@ -7,8 +7,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.annotation.StringRes
-import android.support.v4.app.ActivityOptionsCompat
-import android.support.v4.view.ViewCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
 import android.widget.ImageView
@@ -84,13 +82,9 @@ class SearchMoviesActivity :
 
     // region Override methods
     override fun onMovieSelected(movie: MovieModel, imageViewMoviePoster: ImageView) {
-        startActivity(
+        startActivityWithTransitionAnimation(
             MovieDetailActivity.intent(this, movie),
-            ActivityOptionsCompat.makeSceneTransitionAnimation(
-                this,
-                imageViewMoviePoster,
-                ViewCompat.getTransitionName(imageViewMoviePoster)
-            ).toBundle()
+            imageViewMoviePoster
         )
     }
 

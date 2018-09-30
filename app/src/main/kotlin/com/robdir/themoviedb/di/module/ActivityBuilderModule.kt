@@ -1,6 +1,6 @@
 package com.robdir.themoviedb.di.module
 
-import com.robdir.themoviedb.presentation.moviedetails.MovieDetailActivity
+import com.robdir.themoviedb.presentation.moviedetails.MovieDetailsActivity
 import com.robdir.themoviedb.presentation.movielists.popularmovies.PopularMoviesActivity
 import com.robdir.themoviedb.presentation.movielists.searchmovies.SearchMoviesActivity
 import dagger.Module
@@ -13,7 +13,7 @@ abstract class ActivityBuilderModule {
     abstract fun bindPopularMoviesActivity(): PopularMoviesActivity
 
     @ContributesAndroidInjector
-    abstract fun bindMovieDetailActivity(): MovieDetailActivity
+    abstract fun bindMovieDetailsActivity(): MovieDetailsActivity
 
     @ContributesAndroidInjector
     abstract fun bindSearchMoviesActivity(): SearchMoviesActivity

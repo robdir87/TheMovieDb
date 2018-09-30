@@ -14,7 +14,7 @@ import dagger.Binds
 import dagger.Module
 
 @Module
-abstract class MovieModule {
+abstract class MoviesModule {
     @Binds
     abstract fun bindMoviesRepositoryContract(moviesRepository: MoviesRepository): MoviesRepositoryContract
 

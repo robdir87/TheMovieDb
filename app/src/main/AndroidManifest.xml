@@ -23,7 +23,7 @@
         </activity>
 
         <activity
-            android:name=".presentation.moviedetails.MovieDetailActivity"
+            android:name=".presentation.moviedetails.MovieDetailsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity

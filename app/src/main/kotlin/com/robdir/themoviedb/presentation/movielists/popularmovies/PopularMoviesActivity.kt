@@ -5,8 +5,6 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.annotation.StringRes
-import android.support.v4.app.ActivityOptionsCompat
-import android.support.v4.view.ViewCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
@@ -22,7 +20,7 @@ import com.robdir.themoviedb.presentation.movielists.common.MovieAdapter
 import com.robdir.themoviedb.presentation.movielists.common.MovieModel
 import com.robdir.themoviedb.presentation.movielists.searchmovies.SearchMoviesActivity
 import kotlinx.android.synthetic.main.activity_popular_movies.*
-import kotlinx.android.synthetic.main.layout_no_popular_movies.*
+import kotlinx.android.synthetic.main.layout_no_movies.*
 import javax.inject.Inject
 
 class PopularMoviesActivity :
@@ -71,7 +69,7 @@ class PopularMoviesActivity :
                     )
                 }
 
-        textViewNoPopularMoviesAction.setOnClickListener { loadPopularMovies() }
+        textViewNoMoviesAction.setOnClickListener { loadPopularMovies() }
 
         loadPopularMovies()
     }
@@ -79,13 +77,9 @@ class PopularMoviesActivity :
 
     // region Override methods
     override fun onMovieSelected(movie: MovieModel, imageViewMoviePoster: ImageView) {
-        startActivity(
+        startActivityWithTransitionAnimation(
             MovieDetailActivity.intent(this, movie),
-            ActivityOptionsCompat.makeSceneTransitionAnimation(
-                this,
-                imageViewMoviePoster,
-                ViewCompat.getTransitionName(imageViewMoviePoster)
-            ).toBundle()
+            imageViewMoviePoster
         )
     }
 
@@ -142,14 +136,14 @@ class PopularMoviesActivity :
         layoutPopularMoviesProgress.gone()
     }
 
-    private fun manageError(@StringRes stringResId: Int) {
+    private fun manageError(@StringRes messageId: Int) {
         movieAdapter.movies = emptyList()
 
         swipeRefreshLayoutMovies.gone()
         swipeRefreshLayoutMovies.isRefreshing = false
 
         layoutNoPopularMovies.visible()
-        textViewNoPopularMoviesMessage.setText(stringResId)
+        textViewNoMoviesMessage.setText(messageId)
     }
     // endregion
 }

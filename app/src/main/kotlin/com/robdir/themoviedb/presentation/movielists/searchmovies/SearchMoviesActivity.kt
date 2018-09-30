@@ -7,12 +7,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.annotation.StringRes
-import android.support.v4.app.ActivityOptionsCompat
-import android.support.v4.view.ViewCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
 import android.widget.ImageView
 import com.robdir.themoviedb.R
+import com.robdir.themoviedb.core.SchedulerProvider
 import com.robdir.themoviedb.presentation.base.BaseActivity
 import com.robdir.themoviedb.presentation.common.TheMovieDbError
 import com.robdir.themoviedb.presentation.common.gone
@@ -20,10 +19,14 @@ import com.robdir.themoviedb.presentation.common.visible
 import com.robdir.themoviedb.presentation.moviedetails.MovieDetailActivity
 import com.robdir.themoviedb.presentation.movielists.common.MovieAdapter
 import com.robdir.themoviedb.presentation.movielists.common.MovieModel
+import io.reactivex.Observable
+import io.reactivex.ObservableOnSubscribe
 import kotlinx.android.synthetic.main.activity_search_movies.*
-import kotlinx.android.synthetic.main.layout_no_popular_movies.*
-
+import kotlinx.android.synthetic.main.layout_no_movies.*
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+
+const val SEARCH_DEBOUNCE_TIME_IN_MILLISECONDS = 500L
 
 class SearchMoviesActivity :
     BaseActivity(),
@@ -41,6 +44,9 @@ class SearchMoviesActivity :
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    @Inject
+    lateinit var schedulerProvider: SchedulerProvider
     // endregion
 
     private lateinit var searchMoviesViewModel: SearchMoviesViewModel
@@ -70,19 +76,15 @@ class SearchMoviesActivity :
                     )
                 }
 
-        textViewNoPopularMoviesAction.gone()
+        textViewNoMoviesAction.gone()
     }
     // endregion
 
     // region Override methods
     override fun onMovieSelected(movie: MovieModel, imageViewMoviePoster: ImageView) {
-        startActivity(
+        startActivityWithTransitionAnimation(
             MovieDetailActivity.intent(this, movie),
-            ActivityOptionsCompat.makeSceneTransitionAnimation(
-                this,
-                imageViewMoviePoster,
-                ViewCompat.getTransitionName(imageViewMoviePoster)
-            ).toBundle()
+            imageViewMoviePoster
         )
     }
 
@@ -109,14 +111,22 @@ class SearchMoviesActivity :
     private fun setupSearchView() {
         searchViewMovies.run {
             setIconifiedByDefault(false)
-            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                override fun onQueryTextChange(query: String?): Boolean {
-                    searchMoviesViewModel.searchMovies(query.orEmpty())
-                    return true
-                }
 
-                override fun onQueryTextSubmit(query: String?): Boolean = false
-            })
+            Observable.create(
+                ObservableOnSubscribe<String> { subscriber ->
+                    setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                        override fun onQueryTextChange(query: String?): Boolean {
+                            subscriber.onNext(query.orEmpty())
+                            return true
+                        }
+
+                        override fun onQueryTextSubmit(query: String?): Boolean = false
+                    })
+                }
+            ).debounce(SEARCH_DEBOUNCE_TIME_IN_MILLISECONDS, TimeUnit.MILLISECONDS)
+                .observeOn(schedulerProvider.io())
+                .observeOn(schedulerProvider.mainThread())
+                .subscribe { query -> searchMoviesViewModel.searchMovies(query) }
         }
     }
 
@@ -127,11 +137,11 @@ class SearchMoviesActivity :
         movieAdapter.movies = movies
     }
 
-    private fun manageError(@StringRes stringResId: Int) {
+    private fun manageError(@StringRes messageId: Int) {
         movieAdapter.movies = emptyList()
 
         layoutNoMovies.visible()
-        textViewNoPopularMoviesMessage.setText(stringResId)
+        textViewNoMoviesMessage.setText(messageId)
     }
     // endregion
 }

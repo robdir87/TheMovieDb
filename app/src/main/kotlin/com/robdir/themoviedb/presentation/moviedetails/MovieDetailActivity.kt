@@ -8,13 +8,16 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.annotation.StringRes
+import android.support.design.widget.Snackbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.robdir.themoviedb.R
 import com.robdir.themoviedb.core.LocaleProvider
 import com.robdir.themoviedb.core.isLollipopOrLater
 import com.robdir.themoviedb.presentation.base.BaseActivity
+import com.robdir.themoviedb.presentation.common.TheMovieDbError
 import com.robdir.themoviedb.presentation.common.visibleIf
 import com.robdir.themoviedb.presentation.movielists.common.MovieModel
 import com.squareup.picasso.Callback
@@ -60,6 +63,14 @@ class MovieDetailActivity : BaseActivity() {
                 .apply {
                     movieDetail.observe(this@MovieDetailActivity,
                         Observer<MovieDetailModel> { movieDetail -> displayMovieDetail(movieDetail) }
+                    )
+
+                    error.observe(this@MovieDetailActivity,
+                        Observer<TheMovieDbError> { manageError(R.string.movies_not_available_error_message) }
+                    )
+
+                    networkError.observe(this@MovieDetailActivity,
+                        Observer<TheMovieDbError> { manageError(R.string.network_error_message) }
                     )
                 }
 
@@ -168,8 +179,12 @@ class MovieDetailActivity : BaseActivity() {
         try {
             startActivity(Intent(Intent.ACTION_VIEW).setData(Uri.parse(url)))
         } catch (exception: Exception) {
-            // If the user has no browser, just fail silently
+            Toast.makeText(this, R.string.no_browser_error, Toast.LENGTH_LONG).show()
         }
+    }
+
+    private fun manageError(@StringRes messageId: Int) {
+        Snackbar.make(coordinatorLayoutMovieDetail, messageId, Snackbar.LENGTH_SHORT).show()
     }
     // endregion
 }

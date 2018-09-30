@@ -5,6 +5,7 @@
     <string name="generic_error_message">We\'re sorry, something went wrong. Please try again.</string>
     <string name="no_popular_movies_error_message">Popular movies not available.</string>
     <string name="movies_not_available_error_message">Movies not available.</string>
+    <string name="no_browser_error">No browser installed on this device</string>
 
     <string name="action_try_again">TRY AGAIN</string>
 

@@ -19,21 +19,21 @@ import com.robdir.themoviedb.presentation.common.visibleIf
 import com.robdir.themoviedb.presentation.movielists.common.MovieModel
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_movie_detail.*
+import kotlinx.android.synthetic.main.activity_movie_details.*
 import kotlinx.android.synthetic.main.layout_movie_description.view.*
 import kotlinx.android.synthetic.main.layout_movie_detail_row.view.*
 import kotlinx.android.synthetic.main.layout_movie_popularity.view.*
 import javax.inject.Inject
 
-class MovieDetailActivity : BaseActivity() {
+class MovieDetailsActivity : BaseActivity() {
 
     companion object {
-        val TAG: String = MovieDetailActivity::class.java.simpleName
+        val TAG: String = MovieDetailsActivity::class.java.simpleName
 
         private const val EXTRA_MOVIE = "movie"
 
         fun intent(context: Context, movie: MovieModel): Intent =
-            Intent(context, MovieDetailActivity::class.java).putExtra(EXTRA_MOVIE, movie)
+            Intent(context, MovieDetailsActivity::class.java).putExtra(EXTRA_MOVIE, movie)
     }
 
     // region Injected properties
@@ -49,7 +49,7 @@ class MovieDetailActivity : BaseActivity() {
     // region Lifecycle methods
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_movie_detail)
+        setContentView(R.layout.activity_movie_details)
         supportPostponeEnterTransition()
 
         movieDetailViewModel =
@@ -57,7 +57,7 @@ class MovieDetailActivity : BaseActivity() {
                 onErrorChanged = { manageError(R.string.movies_not_available_error_message) },
                 onNetworkErrorChanged = { manageError(R.string.network_error_message) }
             ).apply {
-                movieDetail.observe(this@MovieDetailActivity,
+                movieDetail.observe(this@MovieDetailsActivity,
                     Observer { movieDetail -> displayMovieDetail(movieDetail) }
                 )
             }

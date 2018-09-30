@@ -12,7 +12,7 @@ import com.robdir.themoviedb.presentation.base.BaseActivity
 import com.robdir.themoviedb.presentation.common.gone
 import com.robdir.themoviedb.presentation.common.visible
 import com.robdir.themoviedb.presentation.common.visibleIf
-import com.robdir.themoviedb.presentation.moviedetails.MovieDetailActivity
+import com.robdir.themoviedb.presentation.moviedetails.MovieDetailsActivity
 import com.robdir.themoviedb.presentation.movielists.common.MovieAdapter
 import com.robdir.themoviedb.presentation.movielists.common.MovieModel
 import com.robdir.themoviedb.presentation.movielists.searchmovies.SearchMoviesActivity
@@ -63,7 +63,7 @@ class PopularMoviesActivity :
     // region Override methods
     override fun onMovieSelected(movie: MovieModel, imageViewMoviePoster: ImageView) {
         startActivityWithTransitionAnimation(
-            MovieDetailActivity.intent(this, movie),
+            MovieDetailsActivity.intent(this, movie),
             imageViewMoviePoster
         )
     }

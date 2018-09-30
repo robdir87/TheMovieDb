@@ -1,8 +1,6 @@
 package com.robdir.themoviedb.presentation.movielists.popularmovies
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.annotation.StringRes
 import android.support.v7.widget.LinearLayoutManager
@@ -11,7 +9,6 @@ import android.view.MenuItem
 import android.widget.ImageView
 import com.robdir.themoviedb.R
 import com.robdir.themoviedb.presentation.base.BaseActivity
-import com.robdir.themoviedb.presentation.common.TheMovieDbError
 import com.robdir.themoviedb.presentation.common.gone
 import com.robdir.themoviedb.presentation.common.visible
 import com.robdir.themoviedb.presentation.common.visibleIf
@@ -34,9 +31,6 @@ class PopularMoviesActivity :
     // region Injected properties
     @Inject
     lateinit var movieAdapter: MovieAdapter
-
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
     // endregion
 
     private lateinit var popularMoviesViewModel: PopularMoviesViewModel
@@ -50,24 +44,15 @@ class PopularMoviesActivity :
         setupRecyclerViewMovies()
 
         popularMoviesViewModel =
-            ViewModelProviders.of(this, viewModelFactory)[PopularMoviesViewModel::class.java]
-                .apply {
-                    movies.observe(this@PopularMoviesActivity,
-                        Observer<List<MovieModel>> { movies -> displayMovies(movies.orEmpty()) }
-                    )
-
-                    isLoading.observe(this@PopularMoviesActivity,
-                        Observer<Boolean> { isLoading -> if (isLoading == false) hideProgress() else showProgress() }
-                    )
-
-                    error.observe(this@PopularMoviesActivity,
-                        Observer<TheMovieDbError> { manageError(R.string.no_popular_movies_error_message) }
-                    )
-
-                    networkError.observe(this@PopularMoviesActivity,
-                        Observer<TheMovieDbError> { manageError(R.string.network_error_message) }
-                    )
-                }
+            viewModel<PopularMoviesViewModel>(
+                onErrorChanged = { manageError(R.string.no_popular_movies_error_message) },
+                onNetworkErrorChanged = { manageError(R.string.network_error_message) },
+                onLoadingChanged = { isLoading -> if (isLoading == false) hideProgress() else showProgress() }
+            ).apply {
+                movies.observe(this@PopularMoviesActivity,
+                    Observer { movies -> displayMovies(movies.orEmpty()) }
+                )
+            }
 
         textViewNoMoviesAction.setOnClickListener { loadPopularMovies() }
 

@@ -24,7 +24,7 @@ import com.robdir.themoviedb.presentation.movielists.common.MovieModel
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import kotlinx.android.synthetic.main.activity_search_movies.*
-import kotlinx.android.synthetic.main.layout_no_popular_movies.*
+import kotlinx.android.synthetic.main.layout_no_movies.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -78,7 +78,7 @@ class SearchMoviesActivity :
                     )
                 }
 
-        textViewNoPopularMoviesAction.gone()
+        textViewNoMoviesAction.gone()
     }
     // endregion
 
@@ -147,7 +147,7 @@ class SearchMoviesActivity :
         movieAdapter.movies = emptyList()
 
         layoutNoMovies.visible()
-        textViewNoPopularMoviesMessage.setText(messageId)
+        textViewNoMoviesMessage.setText(messageId)
     }
     // endregion
 }

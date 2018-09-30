@@ -41,7 +41,7 @@
 
     <include
         android:id="@+id/layoutNoPopularMovies"
-        layout="@layout/layout_no_popular_movies"
+        layout="@layout/layout_no_movies"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/appBarLayoutPopularMovies"

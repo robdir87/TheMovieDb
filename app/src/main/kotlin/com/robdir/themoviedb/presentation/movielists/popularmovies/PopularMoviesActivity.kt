@@ -22,7 +22,7 @@ import com.robdir.themoviedb.presentation.movielists.common.MovieAdapter
 import com.robdir.themoviedb.presentation.movielists.common.MovieModel
 import com.robdir.themoviedb.presentation.movielists.searchmovies.SearchMoviesActivity
 import kotlinx.android.synthetic.main.activity_popular_movies.*
-import kotlinx.android.synthetic.main.layout_no_popular_movies.*
+import kotlinx.android.synthetic.main.layout_no_movies.*
 import javax.inject.Inject
 
 class PopularMoviesActivity :
@@ -71,7 +71,7 @@ class PopularMoviesActivity :
                     )
                 }
 
-        textViewNoPopularMoviesAction.setOnClickListener { loadPopularMovies() }
+        textViewNoMoviesAction.setOnClickListener { loadPopularMovies() }
 
         loadPopularMovies()
     }
@@ -149,7 +149,7 @@ class PopularMoviesActivity :
         swipeRefreshLayoutMovies.isRefreshing = false
 
         layoutNoPopularMovies.visible()
-        textViewNoPopularMoviesMessage.setText(messageId)
+        textViewNoMoviesMessage.setText(messageId)
     }
     // endregion
 }

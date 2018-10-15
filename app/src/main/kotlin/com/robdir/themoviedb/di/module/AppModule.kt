@@ -19,14 +19,14 @@ object AppModule {
     @Module
     interface Binder {
         @Binds
-        fun provideContext(app: App): Context
+        fun bindContext(app: App): Context
 
         @Binds
         @AppScope
-        fun provideSchedulerProvider(reactivexSchedulerProvider: ReactivexSchedulerProvider): SchedulerProvider
+        fun bindSchedulerProvider(reactivexSchedulerProvider: ReactivexSchedulerProvider): SchedulerProvider
 
         @Binds
-        fun provideLocaleProvider(deviceLocaleProvider: DeviceLocaleProvider): LocaleProvider
+        fun bindLocaleProvider(deviceLocaleProvider: DeviceLocaleProvider): LocaleProvider
     }
 
     @Provides

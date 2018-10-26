@@ -30,7 +30,7 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
             ActivityOptionsCompat.makeSceneTransitionAnimation(
                 this,
                 sharedImageView,
-                ViewCompat.getTransitionName(sharedImageView)
+                ViewCompat.getTransitionName(sharedImageView).orEmpty()
             ).toBundle()
         )
     }

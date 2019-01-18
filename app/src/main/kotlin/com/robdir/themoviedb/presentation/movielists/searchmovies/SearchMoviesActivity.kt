@@ -112,7 +112,6 @@ class SearchMoviesActivity :
                     })
                 }
             ).debounce(SEARCH_DEBOUNCE_TIME_IN_MILLISECONDS, TimeUnit.MILLISECONDS)
-                .observeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.mainThread())
                 .subscribe { query -> searchMoviesViewModel.searchMovies(query) }
         }
